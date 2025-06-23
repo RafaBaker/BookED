@@ -133,7 +133,7 @@ void recomendarLivro(BookED* b, int idRecomendador, int idLivro, int idRecomenda
         return;
     }
 
-    adicionaRecomendacaoLeitor(recomendado, livro, recomendador);
+    adicionaRecomendacao(recomendado, livro, recomendador);
     imprimeRecomendacoesLeitor(recomendado);
 }
 
@@ -159,5 +159,37 @@ void aceitarRecomendacao(BookED* b, int idRecomendado, int idLivro, int idRecome
         return;
     }
 
-    aceitaRecomendacaoLeitor();
+    aceitaRecomendacaoLeitor(recomendado, idLivro, idRecomendador);
+    // imprimeRecomendacoesLeitor(recomendado);
+    // imprimeLivrosDesejadosLeitor(recomendado);
+}
+
+void removerRecomendacao(BookED* b, int idRecomendado, int idLivro, int idRecomendador)
+{
+    Leitor* recomendado = (Leitor*)buscaLista(b->leitores, idRecomendado);;
+    Leitor* recomendador = (Leitor*)buscaLista(b->leitores, idRecomendador);
+    Livro* livro = (Livro*)buscaLista(b->livros, idLivro);
+
+    if (!recomendador)
+    {
+        printf("Recomendador não achado\n");
+        return;
+    }
+    if (!recomendado)
+    {
+        printf("Recomendado não achado\n");
+        return;
+    }
+    if (!livro)
+    {
+        printf("Livro não encontrado para recomendação\n");
+        return;
+    }
+
+    removerRecomendacaoLeitor(recomendado, idLivro, idRecomendador);
+}
+
+void imprimeBookEd(BookED* b)
+{
+    imprimeListaLeitores(b->leitores);
 }

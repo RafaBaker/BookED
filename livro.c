@@ -31,7 +31,7 @@ Livro* criaLivro(int id, char* titulo, char* autor, char* genero, int ano)
 void imprimeLivro(void* livro)
 {
     Livro* l = (Livro*)livro;
-    printf("Titulo do livro: %s\n", l->titulo);
+    printf("%s", l->titulo);
 }
 
 int getIdLivro(Livro* livro)

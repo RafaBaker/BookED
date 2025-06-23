@@ -11,6 +11,10 @@ Leitor* criaLeitor(int id, char* nome);
 
 void desalocaLeitor(void* leitor);
 
+void imprimeNomeLeitor(void *leitor);
+
+void imprimeIdLeitor(void *leitor);
+
 void imprimeLeitor(void* leitor);
 
 int comparaIDLeitor(void* leitor, int id);
@@ -27,7 +31,8 @@ void adicionaRecomendacao(Leitor *destinatario, Livro *livro, Leitor *recomendad
 
 void imprimeRecomendacoesLeitor(Leitor* leitor);
 
-void aceitaRecomendacaoLeitor(Leitor *leitor, int id_livro);
+void aceitaRecomendacaoLeitor(Leitor *leitor, int idLivro, int idRecomendador);
 
+void removerRecomendacaoLeitor(Leitor *leitor, int idLivro, int idRecomendador);
 
 #endif

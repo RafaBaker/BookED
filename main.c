@@ -40,8 +40,8 @@ int main(int argc, char const *argv[])
     leLeitoresArquivo(b, pLeitores);
     fclose(pLeitores);
 
-    imprimeLivros(b);
-    imprimeLeitores(b);
+    // imprimeLivros(b);
+    // imprimeLeitores(b);
 
     adicionaLivroLido(b, 1, 1);
     adicionaLivroLido(b, 1, 2);
@@ -54,8 +54,18 @@ int main(int argc, char const *argv[])
 
 
     recomendarLivro(b, 1, 1, 2);
-    aceitaRecomendacao();
+    recomendarLivro(b, 1, 2, 2);
+    recomendarLivro(b, 1, 3, 2);
+    
+    
+    aceitarRecomendacao(b, 2, 1, 1);
+    imprimeBookEd(b);
 
+    printf("==================\n");
+
+    removerRecomendacao(b, 2, 3, 1);
+    imprimeBookEd(b);
+    
 
     return 0;
 }

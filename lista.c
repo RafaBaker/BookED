@@ -9,12 +9,12 @@ typedef struct Celula Celula;
 
 struct Celula
 {
-    void* item;
+    void *item;
     func_ptr_desaloca desaloca;
     // func_ptr_tipo getTipo;
     func_ptr_imprime imprime;
     func_ptr_compara compara;
-    Celula* prox;
+    Celula *prox;
     // Celula* ant;
 };
 
@@ -23,9 +23,9 @@ struct Lista
     Celula *primeiro, *ultimo;
 };
 
-Lista* inicializaLista()
+Lista *inicializaLista()
 {
-    Lista* lista = (Lista*)malloc(sizeof(Lista));
+    Lista *lista = (Lista *)malloc(sizeof(Lista));
 
     lista->primeiro = NULL;
     lista->ultimo = NULL;
@@ -33,15 +33,15 @@ Lista* inicializaLista()
     return lista;
 }
 
-void insereFimLista(Lista* lista, void* item, func_ptr_desaloca desaloca, func_ptr_imprime imprime, func_ptr_compara compara)
+void insereFimLista(Lista *lista, void *item, func_ptr_desaloca desaloca, func_ptr_imprime imprime, func_ptr_compara compara)
 {
-    Celula* nova = malloc(sizeof(Celula));
+    Celula *nova = malloc(sizeof(Celula));
 
     if (!lista->ultimo)
     {
         lista->primeiro = lista->ultimo = nova;
     }
-    else 
+    else
     {
         lista->ultimo = lista->ultimo->prox = nova;
     }
@@ -54,9 +54,9 @@ void insereFimLista(Lista* lista, void* item, func_ptr_desaloca desaloca, func_p
     // printf("Item inserido com sucesso!\n");
 }
 
-void* buscaLista(Lista* lista, int id)
+void *buscaLista(Lista *lista, int id)
 {
-    Celula* aux = lista->primeiro;
+    Celula *aux = lista->primeiro;
     while (aux && !aux->compara(aux->item, id))
     {
         aux = aux->prox;
@@ -70,10 +70,10 @@ void* buscaLista(Lista* lista, int id)
     return aux->item;
 }
 
-void removeLista(Lista* lista, int id)
+void removeLista(Lista *lista, int id)
 {
-    Celula* ant = lista->primeiro;
-    Celula* aux = ant;
+    Celula *ant = lista->primeiro;
+    Celula *aux = ant;
     while (aux && !aux->compara(aux->item, id))
     {
         ant = aux;
@@ -84,7 +84,6 @@ void removeLista(Lista* lista, int id)
     {
         return; // não achou
     }
-
 
     if (aux == lista->primeiro && aux == lista->ultimo)
     {
@@ -106,23 +105,95 @@ void removeLista(Lista* lista, int id)
     free(aux);
 }
 
-void imprimeLista(Lista* lista)
+void *buscaListaComContexto(Lista *lista, func_ptr_compara_contexto compara, void *contexto)
 {
-    Celula* aux = lista->primeiro;
+    if (!lista || !compara)
+        return NULL;
+
+    Celula *aux = lista->primeiro;
+    while (aux)
+    {
+        if (compara(aux->item, contexto))
+        {
+            return aux->item;
+        }
+        aux = aux->prox;
+    }
+    return NULL;
+}
+
+void removeListaComContexto(Lista* lista, func_ptr_compara_contexto compara, void* contexto)
+{
+    Celula* ant = lista->primeiro;
+    Celula* aux = ant;
+    while (aux && !compara(aux->item, contexto))
+    {
+        ant = aux;
+        aux = aux->prox;
+    }
+
+    if (!aux)
+        return;
+
+    if (aux == lista->primeiro && aux == lista->ultimo)
+    {
+        lista->primeiro = lista->ultimo = NULL;
+    }
+    else if (aux == lista->ultimo)
+    {
+        lista->ultimo = ant;
+        lista->ultimo->prox = NULL;
+    }
+    else if (aux == lista->primeiro)
+    {
+        lista->primeiro = aux->prox;
+    }
+    else
+    {
+        ant->prox = aux->prox;
+    }
+    free(aux);
+}
+
+void imprimeLista(Lista *lista)
+{
+    if (!lista || !lista->primeiro) return;
+
+    Celula *aux = lista->primeiro;
     while (aux)
     {
         aux->imprime(aux->item);
-
+        if (aux != lista->ultimo)
+        {
+            printf(", ");
+        }
         aux = aux->prox;
     }
 }
 
-int desalocaLista(Lista* lista)
+void imprimeListaLeitores(Lista *lista)
+{
+    if (!lista || !lista->primeiro) return;
+
+    Celula *aux = lista->primeiro;
+    while (aux)
+    {
+        aux->imprime(aux->item);
+        aux = aux->prox;
+    }
+}
+
+int listaVazia(Lista* lista)
+{
+    return lista->primeiro == NULL && lista->ultimo == NULL;
+}
+
+int desalocaLista(Lista *lista)
 {
     if (lista)
     {
-        Celula* aux;
-        Celula* prox;
+        Celula *aux;
+        Celula *prox;
         aux = lista->primeiro;
         while (aux)
         {

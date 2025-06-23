@@ -14,10 +14,30 @@ typedef struct
     Leitor *recomendador;
 } Recomendacao;
 
-static int comparaRecomendacao(void *rec, int id_livro)
+typedef struct
+{
+    int idLivro;
+    int idRecomendador;
+} ContextoRecomendacao;
+
+static int comparaRecomendacao(void *rec, int idLivro)
 {
     Recomendacao *recomendacao = (Recomendacao *)rec;
-    return (getIdLivro(recomendacao->livro) == id_livro);
+    return (getIdLivro(recomendacao->livro) == idLivro);
+}
+
+static int comparaRecomendacaoComContexto(void* item, void* contexto) {
+    Recomendacao* rec = (Recomendacao*)item;
+    ContextoRecomendacao* ctx = (ContextoRecomendacao*)contexto;
+    
+    return (getIdLivro(rec->livro) == ctx->idLivro && comparaIDLeitor(rec->recomendador, ctx->idRecomendador));
+}
+
+// Função para imprimir uma recomendação
+static void imprimeRecomendacaoLivro(void *rec)
+{
+    Recomendacao *recomendacao = (Recomendacao *)rec;
+    imprimeLivro(recomendacao->livro); // Supondo que você tenha esta função
 }
 
 // Função para imprimir uma recomendação
@@ -77,10 +97,34 @@ void desalocaLeitor(void *leitor)
     leitor = NULL;
 }
 
+void imprimeNomeLeitor(void *leitor)
+{
+    Leitor *l = (Leitor *)leitor;
+    printf("%s", l->nome);
+}
+
+void imprimeIdLeitor(void *leitor)
+{
+    Leitor *l = (Leitor *)leitor;
+    printf("%d", l->id);
+}
+
 void imprimeLeitor(void *leitor)
 {
     Leitor *l = (Leitor *)leitor;
-    printf("Leitor: %s ID:%d\n", l->nome, l->id);
+    printf("\nLeitor: ");
+    imprimeNomeLeitor(leitor);
+    printf("\n");
+    
+    //Livros lidos
+    imprimeLivrosLidosLeitor(l);
+
+    //Livros desejados
+    imprimeLivrosDesejadosLeitor(l);
+
+    //Livros recomendados
+    imprimeRecomendacoesLeitor(l);
+
 }
 
 int comparaIDLeitor(void *leitor, int id)
@@ -96,9 +140,9 @@ void adicionaLivroLidoLeitor(Leitor *leitor, Livro *livro)
 
 void imprimeLivrosLidosLeitor(Leitor *leitor)
 {
-    printf("Livros lidos:\n");
+    printf("Lidos: ");
     imprimeLista(leitor->lidos);
-    printf("\n\n");
+    printf("\n");
 }
 
 void adicionaLivroDesejadoLeitor(Leitor *leitor, Livro *livro)
@@ -117,9 +161,9 @@ void adicionaLivroDesejadoLeitor(Leitor *leitor, Livro *livro)
 
 void imprimeLivrosDesejadosLeitor(Leitor *leitor)
 {
-    printf("Livros desejados:\n");
+    printf("Desejados: ");
     imprimeLista(leitor->desejados);
-    printf("\n\n");
+    printf("\n");
 }
 
 void adicionaRecomendacao(Leitor *destinatario, Livro *livro, Leitor *recomendador)
@@ -130,27 +174,44 @@ void adicionaRecomendacao(Leitor *destinatario, Livro *livro, Leitor *recomendad
     nova_rec->recomendador = recomendador;
 
     // Insere na lista genérica usando as funções específicas
-    insereFimLista(destinatario->recomendacoes, nova_rec, desalocaRecomendacao, imprimeRecomendacao, comparaRecomendacao);
+    insereFimLista(destinatario->recomendacoes, nova_rec, desalocaRecomendacao, imprimeRecomendacaoLivro, comparaRecomendacao);
 }
 
 void imprimeRecomendacoesLeitor(Leitor* leitor)
 {
-    printf("Livros recomendados de %s:\n", leitor->nome);
+    printf("Recomendacoes: ");
     imprimeLista(leitor->recomendacoes);
-    printf("\n\n");
+    printf("\n");
 }
 
-void aceitaRecomendacaoLeitor(Leitor *leitor, int id_livro)
+void aceitaRecomendacaoLeitor(Leitor *leitor, int idLivro, int idRecomendador)
 {
     // Busca a recomendação na lista
-    Recomendacao *rec = (Recomendacao *)buscaLista(leitor->recomendacoes, id_livro);
+    ContextoRecomendacao ctx = {idLivro, idRecomendador};
+    Recomendacao *rec = (Recomendacao *)buscaListaComContexto(leitor->recomendacoes, comparaRecomendacaoComContexto, &ctx);
 
     if (rec)
     {
         // Adiciona o livro à lista de desejados
-        insereFimLista(leitor->desejados, rec->livro, desalocaLivro, imprimeLivro, comparaIDLivro);
+        if (!buscaLista(leitor->desejados, idLivro))
+        {
+            insereFimLista(leitor->desejados, rec->livro, desalocaLivro, imprimeLivro, comparaIDLivro);
+        }
 
         // Remove da lista de recomendações
-        removeLista(leitor->recomendacoes, id_livro);
+        removeListaComContexto(leitor->recomendacoes, comparaRecomendacaoComContexto, &ctx);
+    }
+}
+
+void removerRecomendacaoLeitor(Leitor *leitor, int idLivro, int idRecomendador)
+{
+    // Busca a recomendação na lista
+    ContextoRecomendacao ctx = {idLivro, idRecomendador};
+    Recomendacao *rec = (Recomendacao *)buscaListaComContexto(leitor->recomendacoes, comparaRecomendacaoComContexto, &ctx);
+
+    if (rec)
+    {
+        // Remove da lista de recomendações
+        removeListaComContexto(leitor->recomendacoes, comparaRecomendacaoComContexto, &ctx);
     }
 }
