@@ -110,3 +110,28 @@ void adicionarLivroDesejado(BookED* b, int idLeitor, int idLivro)
     imprimeLivrosDesejadosLeitor(leitor);
 
 }
+
+void recomendarLivro(BookED* b, int idRecomendador, int idLivro, int idRecomendado)
+{
+    Leitor* recomendador = (Leitor*)buscaLista(b->leitores, idRecomendador);
+    Leitor* recomendado = (Leitor*)buscaLista(b->leitores, idRecomendado);;
+    Livro* livro = (Livro*)buscaLista(b->livros, idLivro);
+
+    if (!recomendador)
+    {
+        printf("Recomendador não achado\n");
+        return;
+    }
+    if (!recomendado)
+    {
+        printf("Recomendado não achado\n");
+        return;
+    }
+    if (!livro)
+    {
+        printf("Livro não encontrado para recomendação");
+        return;
+    }
+
+    adicionaRecomendacao(recomendado, livro, recomendador);
+}

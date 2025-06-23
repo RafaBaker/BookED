@@ -13,7 +13,7 @@ struct Leitor
     char* nome;
     Lista* lidos;
     Lista* desejados;
-    Lista* recomendacoes;
+    Lista* recomendacoes; //provavelmente vai ter que ser expandido para uma struct
     Lista* preferencias;
     Lista* afinidades; // lista de pessoas
     // afinidades (?)
@@ -90,4 +90,9 @@ void imprimeLivrosDesejadosLeitor(Leitor* leitor)
     printf("Livros desejados:\n");
     imprimeLista(leitor->desejados);
     printf("\n\n");
+}
+
+void adicionaRecomendacao(Leitor* leitor, Livro* livro, Leitor* recomendador)
+{
+
 }

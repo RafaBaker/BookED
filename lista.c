@@ -15,7 +15,7 @@ struct Celula
     func_ptr_imprime imprime;
     func_ptr_compara compara;
     Celula* prox;
-    Celula* ant;
+    // Celula* ant;
 };
 
 struct Lista
