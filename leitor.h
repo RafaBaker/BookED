@@ -19,4 +19,8 @@ void adicionaLivroLidoLeitor(Leitor* leitor, Livro* livro);
 
 void imprimeLivrosLidosLeitor(Leitor* leitor);
 
+void adicionaLivroDesejadoLeitor(Leitor* leitor, Livro* livro);
+
+void imprimeLivrosDesejadosLeitor(Leitor* leitor);
+
 #endif

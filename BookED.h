@@ -24,5 +24,6 @@ void imprimeLivros(BookED* b);
 
 void adicionaLivroLido(BookED* b, int idLeitor, int idLivro);
 
+void adicionarLivroDesejado(BookED* b, int idLeitor, int idLivro);
 
 #endif

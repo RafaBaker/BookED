@@ -99,3 +99,14 @@ void adicionaLivroLido(BookED* b, int idLeitor, int idLivro)
     imprimeLivrosLidosLeitor(leitor);
 
 }
+
+void adicionarLivroDesejado(BookED* b, int idLeitor, int idLivro)
+{
+    //Pegando livro e leitor
+    Leitor* leitor = (Leitor*)buscaLista(b->leitores, idLeitor);
+    Livro* livro = (Livro*)buscaLista(b->livros, idLivro);
+
+    if (livro) adicionaLivroDesejadoLeitor(leitor, livro);
+    imprimeLivrosDesejadosLeitor(leitor);
+
+}

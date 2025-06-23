@@ -68,4 +68,26 @@ void imprimeLivrosLidosLeitor(Leitor* leitor)
 {
     printf("Livros lidos:\n");
     imprimeLista(leitor->lidos);
+    printf("\n\n");
+}
+
+void adicionaLivroDesejadoLeitor(Leitor* leitor, Livro* livro)
+{
+    // Vendo se o livro não está na lista de lidos
+    if (!buscaLista(leitor->lidos, getIdLivro(livro)))
+    {
+        insereFimLista(leitor->desejados, livro, desalocaLivro, imprimeLivro, comparaIDLivro);
+        printf("Livro adicionado aos recomendados com sucesso!\n");
+    }
+    else
+    {
+        printf("Erro ao cadastrar livro nas recomendações: o Livro já foi lido.\n");
+    }
+}
+
+void imprimeLivrosDesejadosLeitor(Leitor* leitor)
+{
+    printf("Livros desejados:\n");
+    imprimeLista(leitor->desejados);
+    printf("\n\n");
 }

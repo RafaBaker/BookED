@@ -64,6 +64,9 @@ int main(int argc, char const *argv[])
     adicionaLivroLido(b, 1, 2);
     adicionaLivroLido(b, 1, 3);
     adicionaLivroLido(b, 1, 20);
+    // FUNCIONANDO !
+
+    adicionarLivroDesejado(b, 1, 4);
 
 
     return 0;

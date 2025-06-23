@@ -34,6 +34,11 @@ void imprimeLivro(void* livro)
     printf("Titulo do livro: %s\n", l->titulo);
 }
 
+int getIdLivro(Livro* livro)
+{
+    return livro->id;
+}
+
 void desalocaLivro(void* livro)
 {
     if (livro)
