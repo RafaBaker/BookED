@@ -57,6 +57,11 @@ static void desalocaRecomendacao(void *rec)
     free(recomendacao);
 }
 
+static int getTipoRec()
+{
+    return RECOMENDACAO;
+}
+
 struct Leitor
 {
     int id;
@@ -97,6 +102,11 @@ void desalocaLeitor(void *leitor)
     leitor = NULL;
 }
 
+int getTipoLeitor()
+{
+    return LEITOR;
+}
+
 void imprimeNomeLeitor(void *leitor)
 {
     Leitor *l = (Leitor *)leitor;
@@ -135,7 +145,7 @@ int comparaIDLeitor(void *leitor, int id)
 
 void adicionaLivroLidoLeitor(Leitor *leitor, Livro *livro)
 {
-    insereFimLista(leitor->lidos, livro, desalocaLivro, imprimeLivro, comparaIDLivro);
+    insereFimLista(leitor->lidos, livro, desalocaLivro, getTipoLivro, imprimeLivro, comparaIDLivro);
 }
 
 void imprimeLivrosLidosLeitor(Leitor *leitor)
@@ -150,7 +160,7 @@ void adicionaLivroDesejadoLeitor(Leitor *leitor, Livro *livro)
     // Vendo se o livro não está na lista de lidos
     if (!buscaLista(leitor->lidos, getIdLivro(livro)))
     {
-        insereFimLista(leitor->desejados, livro, desalocaLivro, imprimeLivro, comparaIDLivro);
+        insereFimLista(leitor->desejados, livro, desalocaLivro, getTipoLivro, imprimeLivro, comparaIDLivro);
         printf("Livro adicionado aos recomendados com sucesso!\n");
     }
     else
@@ -174,7 +184,7 @@ void adicionaRecomendacao(Leitor *destinatario, Livro *livro, Leitor *recomendad
     nova_rec->recomendador = recomendador;
 
     // Insere na lista genérica usando as funções específicas
-    insereFimLista(destinatario->recomendacoes, nova_rec, desalocaRecomendacao, imprimeRecomendacaoLivro, comparaRecomendacao);
+    insereFimLista(destinatario->recomendacoes, nova_rec, desalocaRecomendacao, getTipoRec, imprimeRecomendacaoLivro, comparaRecomendacao);
 }
 
 void imprimeRecomendacoesLeitor(Leitor* leitor)
@@ -195,7 +205,7 @@ void aceitaRecomendacaoLeitor(Leitor *leitor, int idLivro, int idRecomendador)
         // Adiciona o livro à lista de desejados
         if (!buscaLista(leitor->desejados, idLivro))
         {
-            insereFimLista(leitor->desejados, rec->livro, desalocaLivro, imprimeLivro, comparaIDLivro);
+            insereFimLista(leitor->desejados, rec->livro, desalocaLivro, getTipoLivro, imprimeLivro, comparaIDLivro);
         }
 
         // Remove da lista de recomendações

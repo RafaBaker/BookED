@@ -13,4 +13,6 @@ void desalocaLivro(void* livro);
 
 int comparaIDLivro(void* livro, int id);
 
+int getTipoLivro();
+
 #endif

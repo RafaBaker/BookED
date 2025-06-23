@@ -11,6 +11,8 @@ Leitor* criaLeitor(int id, char* nome);
 
 void desalocaLeitor(void* leitor);
 
+int getTipoLeitor();
+
 void imprimeNomeLeitor(void *leitor);
 
 void imprimeIdLeitor(void *leitor);

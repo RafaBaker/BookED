@@ -11,7 +11,7 @@ struct Celula
 {
     void *item;
     func_ptr_desaloca desaloca;
-    // func_ptr_tipo getTipo;
+    func_ptr_tipo getTipo;
     func_ptr_imprime imprime;
     func_ptr_compara compara;
     Celula *prox;
@@ -33,7 +33,7 @@ Lista *inicializaLista()
     return lista;
 }
 
-void insereFimLista(Lista *lista, void *item, func_ptr_desaloca desaloca, func_ptr_imprime imprime, func_ptr_compara compara)
+void insereFimLista(Lista *lista, void *item, func_ptr_desaloca desaloca, func_ptr_tipo getTipo, func_ptr_imprime imprime, func_ptr_compara compara)
 {
     Celula *nova = malloc(sizeof(Celula));
 
@@ -47,6 +47,7 @@ void insereFimLista(Lista *lista, void *item, func_ptr_desaloca desaloca, func_p
     }
     lista->ultimo->item = item;
     lista->ultimo->desaloca = desaloca;
+    lista->ultimo->getTipo = getTipo;
     lista->ultimo->imprime = imprime;
     lista->ultimo->compara = compara;
     lista->ultimo->prox = NULL;
@@ -163,7 +164,7 @@ void imprimeLista(Lista *lista)
     while (aux)
     {
         aux->imprime(aux->item);
-        if (aux != lista->ultimo)
+        if (aux->getTipo() == LIVRO && aux != lista->ultimo)
         {
             printf(", ");
         }
@@ -171,17 +172,17 @@ void imprimeLista(Lista *lista)
     }
 }
 
-void imprimeListaLeitores(Lista *lista)
-{
-    if (!lista || !lista->primeiro) return;
+// void imprimeListaLeitores(Lista *lista)
+// {
+//     if (!lista || !lista->primeiro) return;
 
-    Celula *aux = lista->primeiro;
-    while (aux)
-    {
-        aux->imprime(aux->item);
-        aux = aux->prox;
-    }
-}
+//     Celula *aux = lista->primeiro;
+//     while (aux)
+//     {
+//         aux->imprime(aux->item);
+//         aux = aux->prox;
+//     }
+// }
 
 int listaVazia(Lista* lista)
 {

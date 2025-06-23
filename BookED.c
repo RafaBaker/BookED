@@ -45,7 +45,7 @@ void leLivrosArquivo(BookED* b, FILE* pLivros)
 
         sscanf(linha, "%d;%[^;];%[^;];%[^;];%d\n", &id, titulo, autor, genero, &ano);
         livro = criaLivro(id, titulo, autor, genero, ano);
-        insereFimLista(b->livros, livro, desalocaLivro, imprimeLivro, comparaIDLivro);
+        insereFimLista(b->livros, livro, desalocaLivro, getTipoLivro, imprimeLivro, comparaIDLivro);
     }
 }
 
@@ -69,7 +69,7 @@ void leLeitoresArquivo(BookED* b, FILE* pLeitores)
 
         sscanf(linha, "%d;%[^;];", &id, nome);
         leitor = criaLeitor(id, nome);
-        insereFimLista(b->leitores, leitor, desalocaLeitor, imprimeLeitor, comparaIDLeitor);
+        insereFimLista(b->leitores, leitor, desalocaLeitor, getTipoLeitor, imprimeLeitor, comparaIDLeitor);
     }
 }
 
@@ -191,5 +191,5 @@ void removerRecomendacao(BookED* b, int idRecomendado, int idLivro, int idRecome
 
 void imprimeBookEd(BookED* b)
 {
-    imprimeListaLeitores(b->leitores);
+    imprimeLista(b->leitores);
 }

@@ -4,6 +4,7 @@
 #include <assert.h>
 
 #include "livro.h"
+#include "lista.h"
 
 struct Livro
 {
@@ -59,4 +60,9 @@ int comparaIDLivro(void* livro, int id)
 {
     Livro* l = (Livro*)livro;
     return l->id == id;
+}
+
+int getTipoLivro()
+{
+    return LIVRO;
 }
