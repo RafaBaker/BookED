@@ -17,6 +17,8 @@ void insereFimLista(Lista* lista, void* item, func_ptr_desaloca desaloca, func_p
 
 void* buscaLista(Lista* lista, int id);
 
+void removeLista(Lista* lista, int id);
+
 void imprimeLista(Lista* lista);
 
 int desalocaLista(Lista* lista);

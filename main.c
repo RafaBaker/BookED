@@ -54,6 +54,7 @@ int main(int argc, char const *argv[])
 
 
     recomendarLivro(b, 1, 1, 2);
+    aceitaRecomendacao();
 
 
     return 0;

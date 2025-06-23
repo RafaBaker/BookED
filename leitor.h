@@ -23,4 +23,11 @@ void adicionaLivroDesejadoLeitor(Leitor* leitor, Livro* livro);
 
 void imprimeLivrosDesejadosLeitor(Leitor* leitor);
 
+void adicionaRecomendacao(Leitor *destinatario, Livro *livro, Leitor *recomendador);
+
+void imprimeRecomendacoesLeitor(Leitor* leitor);
+
+void aceitaRecomendacaoLeitor(Leitor *leitor, int id_livro);
+
+
 #endif

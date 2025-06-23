@@ -26,4 +26,6 @@ void adicionaLivroLido(BookED* b, int idLeitor, int idLivro);
 
 void adicionarLivroDesejado(BookED* b, int idLeitor, int idLivro);
 
+void recomendarLivro(BookED* b, int idRecomendador, int idLivro, int idRecomendado);
+
 #endif
