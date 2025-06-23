@@ -49,3 +49,9 @@ void desalocaLivro(void* livro)
     }
     livro = NULL;
 }
+
+int comparaIDLivro(void* livro, int id)
+{
+    Livro* l = (Livro*)livro;
+    return l->id == id;
+}

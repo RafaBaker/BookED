@@ -37,7 +37,7 @@ void leLivrosArquivo(BookED* b, FILE* pLivros)
 
 
     fgets(linha, sizeof(linha), pLivros);
-    printf("linha: %s\n", linha);
+    // printf("linha: %s\n", linha);
 
     while (fgets(linha, sizeof(linha), pLivros) != NULL)
     {
@@ -45,31 +45,57 @@ void leLivrosArquivo(BookED* b, FILE* pLivros)
 
         sscanf(linha, "%d;%[^;];%[^;];%[^;];%d\n", &id, titulo, autor, genero, &ano);
         livro = criaLivro(id, titulo, autor, genero, ano);
-        insereFimLista(b->livros, livro, desalocaLivro, imprimeLivro);
+        insereFimLista(b->livros, livro, desalocaLivro, imprimeLivro, comparaIDLivro);
     }
 }
 
-void leLivrosArquivo(BookED* b, FILE* pLeitores)
+void leLeitoresArquivo(BookED* b, FILE* pLeitores)
 {
     char linha[200];
     // char* token;
     int id;
-    char titulo[50];
-    char autor[50];
-    char genero[50];
+    int qtdAfinidades;
+    char nome[50];
     int ano;
-    Livro* livro;
+    Leitor* leitor;
 
 
     fgets(linha, sizeof(linha), pLeitores);
-    printf("linha: %s\n", linha);
+    // printf("linha: %s\n", linha);
 
     while (fgets(linha, sizeof(linha), pLeitores) != NULL)
     {
         //linha[strcspn(linha, "\n")] = '\0';  // tirando o \n e substituindo por \0
 
-        sscanf(linha, "%d;%[^;];%[^;];%[^;];%d\n", &id, titulo, autor, genero, &ano);
-        livro = criaLivro(id, titulo, autor, genero, ano);
-        insereFimLista(b->livros, livro, desalocaLivro, imprimeLivro);
+        sscanf(linha, "%d;%[^;];", &id, nome);
+        leitor = criaLeitor(id, nome);
+        insereFimLista(b->leitores, leitor, desalocaLeitor, imprimeLeitor, comparaIDLeitor);
     }
+}
+
+void imprimeLeitores(BookED* b)
+{
+    printf("LISTA DE LEITORES\n");
+    imprimeLista(b->leitores);
+    printf("\n\n");
+}
+
+void imprimeLivros(BookED* b)
+{
+    printf("LISTA DE LIVROS\n");
+    imprimeLista(b->livros);
+    printf("\n\n");
+}
+
+void adicionaLivroLido(BookED* b, int idLeitor, int idLivro)
+{
+    Leitor* leitor = (Leitor*)buscaLista(b->leitores, idLeitor);
+    imprimeLeitor(leitor);
+
+    Livro* livro = (Livro*)buscaLista(b->livros, idLivro);
+    if (livro) imprimeLivro(livro);
+
+    if (livro) adicionaLivroLidoLeitor(leitor, livro);
+    imprimeLivrosLidosLeitor(leitor);
+
 }

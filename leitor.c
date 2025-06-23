@@ -14,7 +14,8 @@ struct Leitor
     Lista* lidos;
     Lista* desejados;
     Lista* recomendacoes;
-    Lista* afinidades;
+    Lista* preferencias;
+    Lista* afinidades; // lista de pessoas
     // afinidades (?)
 };
 
@@ -44,4 +45,27 @@ void desalocaLeitor(void* leitor)
         free(l);
     }
     leitor = NULL;
+}
+
+void imprimeLeitor(void* leitor)
+{
+    Leitor* l = (Leitor*)leitor;
+    printf("Leitor: %s ID:%d\n", l->nome, l->id);
+}
+
+int comparaIDLeitor(void* leitor, int id)
+{
+    Leitor* l = (Leitor*)leitor;
+    return l->id == id;
+}
+
+void adicionaLivroLidoLeitor(Leitor* leitor, Livro* livro)
+{
+    insereFimLista(leitor->lidos, livro, desalocaLivro, imprimeLivro, comparaIDLivro);
+}
+
+void imprimeLivrosLidosLeitor(Leitor* leitor)
+{
+    printf("Livros lidos:\n");
+    imprimeLista(leitor->lidos);
 }

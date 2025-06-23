@@ -26,6 +26,8 @@ int main(int argc, char const *argv[])
 
     // desalocaLista(lista);
 
+    BookED* b = inicializaBookED();
+
 
     char arquivoLivros[200];
     // printf("%s/livros.txt", argv[1]);
@@ -34,14 +36,35 @@ int main(int argc, char const *argv[])
     pLivros = fopen(arquivoLivros, "r");
     if (!pLivros)
     {
-        printf("Erro ao brir arquivo de livros\n");
+        printf("Erro ao abrir arquivo de livros\n");
         exit(0);
     }
 
-    BookED* b = inicializaBookED();
     leLivrosArquivo(b, pLivros);
-
     fclose(pLivros);
+
+
+    char arquivoLeitores[200];
+    sprintf(arquivoLeitores, "%s/leitores.txt", argv[1]);
+    FILE* pLeitores;
+    pLeitores = fopen(arquivoLeitores, "r");
+    if (!pLeitores)
+    {
+        printf("Erro ao abrir arquivo de leitores\n");
+        exit(0);
+    }
+
+    leLeitoresArquivo(b, pLeitores);
+    fclose(pLeitores);
+
+    imprimeLivros(b);
+    imprimeLeitores(b);
+
+    adicionaLivroLido(b, 1, 1);
+    adicionaLivroLido(b, 1, 2);
+    adicionaLivroLido(b, 1, 3);
+    adicionaLivroLido(b, 1, 20);
+
 
     return 0;
 }

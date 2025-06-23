@@ -12,10 +12,17 @@
 
 typedef struct BookED BookED;
 
-
 BookED* inicializaBookED();
 
 void leLivrosArquivo(BookED* b, FILE* pLivros);
+
+void leLeitoresArquivo(BookED* b, FILE* pLeitores);
+
+void imprimeLeitores(BookED* b);
+
+void imprimeLivros(BookED* b);
+
+void adicionaLivroLido(BookED* b, int idLeitor, int idLivro);
 
 
 #endif

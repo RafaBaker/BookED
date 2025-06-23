@@ -13,6 +13,7 @@ struct Celula
     func_ptr_desaloca desaloca;
     // func_ptr_tipo getTipo;
     func_ptr_imprime imprime;
+    func_ptr_compara compara;
     Celula* prox;
     Celula* ant;
 };
@@ -32,7 +33,7 @@ Lista* inicializaLista()
     return lista;
 }
 
-void insereFimLista(Lista* lista, void* item, func_ptr_desaloca desaloca, func_ptr_imprime imprime)
+void insereFimLista(Lista* lista, void* item, func_ptr_desaloca desaloca, func_ptr_imprime imprime, func_ptr_compara compara)
 {
     Celula* nova = malloc(sizeof(Celula));
 
@@ -47,9 +48,62 @@ void insereFimLista(Lista* lista, void* item, func_ptr_desaloca desaloca, func_p
     lista->ultimo->item = item;
     lista->ultimo->desaloca = desaloca;
     lista->ultimo->imprime = imprime;
+    lista->ultimo->compara = compara;
     lista->ultimo->prox = NULL;
 
-    printf("Item inserido com sucesso!\n");
+    // printf("Item inserido com sucesso!\n");
+}
+
+void* buscaLista(Lista* lista, int id)
+{
+    Celula* aux = lista->primeiro;
+    while (aux && !aux->compara(aux->item, id))
+    {
+        aux = aux->prox;
+    }
+
+    if (!aux)
+    {
+        printf("Item não encontrado\n");
+        return NULL;
+    }
+    return aux->item;
+}
+
+void removeLista(Lista* lista, int id)
+{
+    Celula* ant = lista->primeiro;
+    Celula* aux = ant;
+    while (aux && !aux->compara(aux->item, id))
+    {
+        ant = aux;
+        aux = aux->prox;
+    }
+
+    if (!aux)
+    {
+        return; // não achou
+    }
+
+
+    if (aux == lista->primeiro && aux == lista->ultimo)
+    {
+        lista->primeiro = lista->ultimo = NULL;
+    }
+    else if (aux == lista->ultimo)
+    {
+        lista->ultimo = ant;
+        lista->ultimo->prox = NULL;
+    }
+    else if (aux == lista->primeiro)
+    {
+        lista->primeiro = aux->prox;
+    }
+    else
+    {
+        ant->prox = aux->prox;
+    }
+    free(aux);
 }
 
 void imprimeLista(Lista* lista)
