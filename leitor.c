@@ -25,10 +25,10 @@ Leitor* criaLeitor(int id, char* nome)
     leitor->id = id;
     leitor->nome = strdup(nome);
 
-    leitor->lidos = NULL;
-    leitor->desejados = NULL;
-    leitor->recomendacoes = NULL;
-    leitor->afinidades = NULL;
+    leitor->lidos = inicializaLista();
+    leitor->desejados = inicializaLista();
+    leitor->recomendacoes = inicializaLista();
+    leitor->afinidades = inicializaLista();
 
     return leitor;
 }
