@@ -16,6 +16,7 @@ struct Celula
     func_ptr_imprime imprime;
     func_ptr_compara compara;
     Celula *prox;
+    int idCelula;
     // Celula* ant;
 };
 
@@ -52,6 +53,11 @@ void insereFimLista(Lista *lista, void *item, func_ptr_desaloca desaloca, func_p
     lista->ultimo->imprime = imprime;
     lista->ultimo->compara = compara;
     lista->ultimo->prox = NULL;
+
+    if (getTipo() == LISTA)
+    {
+        lista->ultimo->idCelula = ;
+    }
 
     // printf("Item inserido com sucesso!\n");
 }
@@ -228,4 +234,9 @@ int desalocaListaStruct(Lista* lista)
         return 1;
     }
     return 0;
+}
+
+int getTipo()
+{
+    return LISTA;
 }

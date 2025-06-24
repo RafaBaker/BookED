@@ -12,6 +12,7 @@ struct BookED
 {
     Lista* leitores;
     Lista* livros;
+    Lista* afinidades;
 };
 
 BookED* inicializaBookED()
@@ -20,6 +21,7 @@ BookED* inicializaBookED()
 
     b->leitores = inicializaLista();
     b->livros = inicializaLista();
+    b->afinidades = inicializaLista();
 
     return b;
 }
@@ -220,4 +222,9 @@ int desalocaBookEd(BookED* b)
     }
     b = NULL;
     return 1;
+}
+
+void carregaAfinidades()
+{
+    
 }

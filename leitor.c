@@ -69,7 +69,7 @@ struct Leitor
     char *nome;
     Lista *lidos;
     Lista *desejados;
-    Lista *recomendacoes; // provavelmente vai ter que ser expandido para uma struct
+    Lista *recomendacoes; // Lista de strings
     Lista *preferencias;
     Lista *afinidades; // lista de pessoas
     // afinidades (?)
@@ -246,4 +246,10 @@ void imprimePreferenciasLeitor(Leitor* leitor)
     printf("Preferencias: ");
     imprimeLista(leitor->preferencias);
     printf("\n\n");
+}
+
+void constroiAfinidades(Leitor* leitor)
+{
+    
+
 }

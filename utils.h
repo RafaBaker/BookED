@@ -6,7 +6,8 @@ enum Tipo
     LIVRO,
     LEITOR,
     RECOMENDACAO,
-    STRING
+    STRING,
+    LISTA
 };
 
 void imprimeString(void* string);
