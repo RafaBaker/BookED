@@ -3,6 +3,7 @@
 #include <string.h>
 #include <assert.h>
 
+#include "utils.h"
 #include "leitor.h"
 #include "livro.h"
 #include "lista.h"
@@ -54,7 +55,7 @@ static void imprimeRecomendacao(void *rec)
 static void desalocaRecomendacao(void *rec)
 {
     Recomendacao *recomendacao = (Recomendacao *)rec;
-    free(recomendacao);
+    if (recomendacao) free(recomendacao);
 }
 
 static int getTipoRec()
@@ -84,6 +85,7 @@ Leitor *criaLeitor(int id, char *nome)
     leitor->lidos = inicializaLista();
     leitor->desejados = inicializaLista();
     leitor->recomendacoes = inicializaLista();
+    leitor->preferencias = inicializaLista();
     leitor->afinidades = inicializaLista();
 
     return leitor;
@@ -97,7 +99,13 @@ void desalocaLeitor(void *leitor)
 
         free(l->nome);
 
-        free(l);
+        desalocaListaStruct(l->lidos);
+        desalocaListaStruct(l->desejados);
+        desalocaLista(l->recomendacoes);
+        desalocaListaStruct(l->preferencias);
+        desalocaLista(l->afinidades);
+
+        free(leitor);
     }
     leitor = NULL;
 }
@@ -210,6 +218,7 @@ void aceitaRecomendacaoLeitor(Leitor *leitor, int idLivro, int idRecomendador)
 
         // Remove da lista de recomendações
         removeListaComContexto(leitor->recomendacoes, comparaRecomendacaoComContexto, &ctx);
+        desalocaRecomendacao(rec);
     }
 }
 
@@ -223,5 +232,18 @@ void removerRecomendacaoLeitor(Leitor *leitor, int idLivro, int idRecomendador)
     {
         // Remove da lista de recomendações
         removeListaComContexto(leitor->recomendacoes, comparaRecomendacaoComContexto, &ctx);
+        desalocaRecomendacao(rec);
     }
+}
+
+void inserePreferenciaLeitor(Leitor* leitor, char* afinidade)
+{
+    insereFimLista(leitor->preferencias, afinidade, desalocaString, getTipoString, imprimeString, NULL);
+}
+
+void imprimePreferenciasLeitor(Leitor* leitor)
+{
+    printf("Preferencias: ");
+    imprimeLista(leitor->preferencias);
+    printf("\n\n");
 }

@@ -34,5 +34,7 @@ void aceitarRecomendacao(BookED* b, int idRecomendado, int idLivro, int idRecome
 
 void removerRecomendacao(BookED* b, int idRecomendado, int idLivro, int idRecomendador);
 
+int desalocaBookEd(BookED* b);
+
 
 #endif

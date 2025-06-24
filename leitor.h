@@ -37,4 +37,8 @@ void aceitaRecomendacaoLeitor(Leitor *leitor, int idLivro, int idRecomendador);
 
 void removerRecomendacaoLeitor(Leitor *leitor, int idLivro, int idRecomendador);
 
+void inserePreferenciaLeitor(Leitor* leitor, char* afinidade);
+
+void imprimePreferenciasLeitor(Leitor* leitor);
+
 #endif

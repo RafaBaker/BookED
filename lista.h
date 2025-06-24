@@ -1,12 +1,7 @@
 #ifndef LISTA_H
 #define LISTA_H
 
-enum Tipo
-{
-    LIVRO,
-    LEITOR,
-    RECOMENDACAO
-};
+#include "utils.h"
 
 typedef struct Lista Lista;
 
@@ -39,6 +34,8 @@ void imprimeLista(Lista* lista);
 int listaVazia(Lista* lista);
 
 int desalocaLista(Lista* lista);
+
+int desalocaListaStruct(Lista* lista);
 
 
 #endif

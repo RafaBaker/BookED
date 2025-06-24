@@ -65,11 +65,26 @@ void leLeitoresArquivo(BookED* b, FILE* pLeitores)
 
     while (fgets(linha, sizeof(linha), pLeitores) != NULL)
     {
-        //linha[strcspn(linha, "\n")] = '\0';  // tirando o \n e substituindo por \0
+        linha[strcspn(linha, "\n")] = '\0';  // tirando o \n e substituindo por \0
 
         sscanf(linha, "%d;%[^;];", &id, nome);
+
         leitor = criaLeitor(id, nome);
         insereFimLista(b->leitores, leitor, desalocaLeitor, getTipoLeitor, imprimeLeitor, comparaIDLeitor);
+
+        //Fatiando a string para pegar as afinidades
+        char* token = strtok(linha, ";");
+        token = strtok(NULL, ";");
+        token = strtok(NULL, ";");
+        if (token) qtdAfinidades = atoi(token);
+
+        for (int i = 0; i < qtdAfinidades; i++)
+        {
+            token = strtok(NULL, ";");
+            inserePreferenciaLeitor(leitor, token);
+        }
+
+        // imprimePreferenciasLeitor(leitor);
     }
 }
 
@@ -192,4 +207,17 @@ void removerRecomendacao(BookED* b, int idRecomendado, int idLivro, int idRecome
 void imprimeBookEd(BookED* b)
 {
     imprimeLista(b->leitores);
+}
+
+
+int desalocaBookEd(BookED* b)
+{
+    if (b)
+    {
+        desalocaLista(b->livros);
+        desalocaLista(b->leitores);
+        free(b);
+    }
+    b = NULL;
+    return 1;
 }

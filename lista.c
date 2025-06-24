@@ -3,6 +3,7 @@
 #include <string.h>
 #include <assert.h>
 
+#include "utils.h"
 #include "lista.h"
 
 typedef struct Celula Celula;
@@ -199,6 +200,7 @@ int desalocaLista(Lista *lista)
         while (aux)
         {
             prox = aux->prox;
+            aux->desaloca(aux->item);
             free(aux);
             aux = prox;
         }
@@ -206,4 +208,24 @@ int desalocaLista(Lista *lista)
     }
     lista = NULL;
     return 1;
+}
+
+int desalocaListaStruct(Lista* lista)
+{
+    if (lista)
+    {
+        Celula* aux = lista->primeiro;
+        Celula* prox;
+        while (aux)
+        {
+            prox = aux->prox;
+            free(aux);
+            aux = prox;
+        }
+
+        free(lista);
+        lista = NULL;
+        return 1;
+    }
+    return 0;
 }
