@@ -16,12 +16,12 @@ struct Celula
     func_ptr_imprime imprime;
     func_ptr_compara compara;
     Celula *prox;
-    int idCelula;
     // Celula* ant;
 };
 
 struct Lista
 {
+    int idLista;
     Celula *primeiro, *ultimo;
 };
 
@@ -31,6 +31,7 @@ Lista *inicializaLista()
 
     lista->primeiro = NULL;
     lista->ultimo = NULL;
+    lista->idLista = -1;
 
     return lista;
 }
@@ -53,11 +54,6 @@ void insereFimLista(Lista *lista, void *item, func_ptr_desaloca desaloca, func_p
     lista->ultimo->imprime = imprime;
     lista->ultimo->compara = compara;
     lista->ultimo->prox = NULL;
-
-    if (getTipo() == LISTA)
-    {
-        lista->ultimo->idCelula = ;
-    }
 
     // printf("Item inserido com sucesso!\n");
 }
@@ -179,6 +175,12 @@ void imprimeLista(Lista *lista)
     }
 }
 
+void imprimeListaStruct(void* lista)
+{
+    Lista* l = (Lista*)lista;
+    printf("Lista de ID %d\n", l->idLista);
+}
+
 // void imprimeListaLeitores(Lista *lista)
 // {
 //     if (!lista || !lista->primeiro) return;
@@ -216,11 +218,12 @@ int desalocaLista(Lista *lista)
     return 1;
 }
 
-int desalocaListaStruct(Lista* lista)
+void desalocaListaStruct(void* lista)
 {
-    if (lista)
+    Lista* l = (Lista*)lista;
+    if (l)
     {
-        Celula* aux = lista->primeiro;
+        Celula* aux = l->primeiro;
         Celula* prox;
         while (aux)
         {
@@ -231,12 +234,29 @@ int desalocaListaStruct(Lista* lista)
 
         free(lista);
         lista = NULL;
-        return 1;
+        //return 1;
     }
-    return 0;
+    //return 0;
 }
 
-int getTipo()
+int getTipoLista()
 {
     return LISTA;
+}
+
+int quantidadeLista(Lista* lista)
+{
+    Celula* aux = lista->primeiro;
+    int i = 0;
+    while (aux)
+    {
+        i++;
+        aux = aux->prox;
+    }
+    return i;
+}
+
+int setaIdLista(Lista* lista, int id)
+{
+    lista->idLista = id;
 }

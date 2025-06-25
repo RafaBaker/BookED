@@ -29,13 +29,20 @@ void removeListaComContexto(Lista* lista, func_ptr_compara_contexto compara, voi
 
 void imprimeLista(Lista* lista);
 
+void imprimeListaStruct(void* lista);
+
 // void imprimeListaLeitores(Lista *lista);
 
 int listaVazia(Lista* lista);
 
 int desalocaLista(Lista* lista);
 
-int desalocaListaStruct(Lista* lista);
+void desalocaListaStruct(void* lista);
 
+int getTipoLista();
+
+int quantidadeLista(Lista* lista);
+
+int setaIdLista(Lista* lista, int id);
 
 #endif

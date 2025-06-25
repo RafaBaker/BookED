@@ -224,7 +224,14 @@ int desalocaBookEd(BookED* b)
     return 1;
 }
 
-void carregaAfinidades()
+void carregaAfinidades(BookED* b)
 {
-    
+    int qtdLeitores = quantidadeLista(b->leitores);
+    for (int i = 1; i <= qtdLeitores; i++)
+    {
+        Lista* l = inicializaLista();
+        setaIdLista(l,  i);
+        insereFimLista(b->afinidades, l, desalocaListaStruct, getTipoLista, imprimeListaStruct, NULL);
+    }
+    imprimeLista(b->afinidades);
 }
