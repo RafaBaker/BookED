@@ -15,6 +15,8 @@ void imprimeString(void* string);
 
 void desalocaString(void* string);
 
+void imprimeInt(void* inteiro);
+
 int getTipoString();
 
 int getTipoInt();

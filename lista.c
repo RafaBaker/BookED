@@ -279,19 +279,19 @@ int temItemComumLista(Lista* l1, Lista* l2)
     qtdL2 = quantidadeLista(l2);
 
 
-    imprimeLista(l1);
+    // imprimeLista(l1);
     while (aux1)
     {
-        printf("aux1: ");
-        imprimeString(aux1->item);
+        //printf("aux1: ");
+        //imprimeString(aux1->item);
         aux2 = l2->primeiro;
         while (aux2)
         {
             // Talvez as afindades não estejam sendo armazenadas corretamente
-            printf("\n");
-            printf("aux2: ");
-            imprimeString(aux2->item);
-            printf("\n");
+            // printf("\n");
+            // printf("aux2: ");
+            // imprimeString(aux2->item);
+            // printf("\n");
 
             if (!strcmp(aux1->item, aux2->item))
             {

@@ -242,11 +242,15 @@ void inicializaAfinidades(BookED* b)
 
             if (temGenerosComuns(leitor, aux))
             {
-                insereFimLista(afLeitor, j, free, getTipoInt, NULL, NULL);
+                int* id = malloc(sizeof(id));
+                *id = j;
+                insereFimLista(afLeitor, id, free, getTipoInt, imprimeInt, NULL);
             }
 
         }
         setaIdLista(afLeitor,  i);
+        imprimeLista(afLeitor);
+        printf("\n");
         // Carregando as afinidades
         insereFimLista(b->afinidades, afLeitor, desalocaListaStruct, getTipoLista, imprimeListaStruct, NULL);
     }

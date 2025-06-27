@@ -21,7 +21,11 @@ void desalocaString(void* string)
     }
 }
 
-// int comparaString
+void imprimeInt(void* inteiro)
+{
+    int i = *(int*)inteiro;
+    printf("%d ", i);
+}
 
 int getTipoString()
 {

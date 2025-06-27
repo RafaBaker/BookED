@@ -256,6 +256,6 @@ int temGenerosComuns(Leitor* l1, Leitor* l2)
     // nao sei como fazer isso ainda
     // imprimePreferenciasLeitor(l1);
     // imprimePreferenciasLeitor(l2);
-    imprimeNomeLeitor(l1);
+    // imprimeNomeLeitor(l1);
     return temItemComumLista(l1->preferencias, l2->preferencias);
 }
