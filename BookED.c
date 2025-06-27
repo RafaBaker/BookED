@@ -72,21 +72,22 @@ void leLeitoresArquivo(BookED* b, FILE* pLeitores)
         sscanf(linha, "%d;%[^;];", &id, nome);
 
         leitor = criaLeitor(id, nome);
-        insereFimLista(b->leitores, leitor, desalocaLeitor, getTipoLeitor, imprimeLeitor, comparaIDLeitor);
-
+        
         //Fatiando a string para pegar as afinidades
         char* token = strtok(linha, ";");
         token = strtok(NULL, ";");
         token = strtok(NULL, ";");
         if (token) qtdAfinidades = atoi(token);
-
+        
         for (int i = 0; i < qtdAfinidades; i++)
         {
             token = strtok(NULL, ";");
-            inserePreferenciaLeitor(leitor, token);
+            char* afinidade = strdup(token);
+            inserePreferenciaLeitor(leitor, afinidade);
         }
-
-        // imprimePreferenciasLeitor(leitor);
+        
+        insereFimLista(b->leitores, leitor, desalocaLeitor, getTipoLeitor, imprimeLeitor, comparaIDLeitor);
+        imprimePreferenciasLeitor(leitor);
     }
 }
 
@@ -231,6 +232,7 @@ void inicializaAfinidades(BookED* b)
     {
         Lista* afLeitor = inicializaLista();
         Leitor* leitor = buscaLista(b->leitores, i);
+        // imprimePreferenciasLeitor(leitor);
 
         for (int j = 1; j <=qtdLeitores; j++)
         {

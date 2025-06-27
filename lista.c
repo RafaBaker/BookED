@@ -258,3 +258,49 @@ int setaIdLista(Lista* lista, int id)
 {
     lista->idLista = id;
 }
+
+int temItemComumLista(Lista* l1, Lista* l2)
+{
+    Celula* aux1 = l1->primeiro;
+    Celula* aux2 = l2->primeiro;
+    int qtdL1, qtdL2;
+
+    if (!aux1 && !aux2)
+    {
+        return 1;
+    }
+
+    if (!aux1 || !aux2)
+    {
+        return 0;
+    }
+
+    qtdL1 = quantidadeLista(l1);
+    qtdL2 = quantidadeLista(l2);
+
+
+    imprimeLista(l1);
+    while (aux1)
+    {
+        printf("aux1: ");
+        imprimeString(aux1->item);
+        aux2 = l2->primeiro;
+        while (aux2)
+        {
+            // Talvez as afindades não estejam sendo armazenadas corretamente
+            printf("\n");
+            printf("aux2: ");
+            imprimeString(aux2->item);
+            printf("\n");
+
+            if (!strcmp(aux1->item, aux2->item))
+            {
+                return 1;
+            }
+            aux2 = aux2->prox;
+        }
+        // Tem que ajeitar isso aqui para usar o "compara"
+        aux1 = aux1->prox;
+    }
+    return 0;
+}

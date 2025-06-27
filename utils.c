@@ -21,6 +21,8 @@ void desalocaString(void* string)
     }
 }
 
+// int comparaString
+
 int getTipoString()
 {
     return STRING;

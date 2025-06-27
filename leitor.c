@@ -69,8 +69,8 @@ struct Leitor
     char *nome;
     Lista *lidos;
     Lista *desejados;
-    Lista *recomendacoes; // Lista de strings
-    Lista *preferencias;
+    Lista *recomendacoes;
+    Lista *preferencias; // Lista de strings
     Lista *afinidades; // lista de pessoas
     // afinidades (?)
 };
@@ -142,6 +142,9 @@ void imprimeLeitor(void *leitor)
 
     //Livros recomendados
     imprimeRecomendacoesLeitor(l);
+
+    //Preferencias
+    imprimePreferenciasLeitor(l);
 
 }
 
@@ -251,5 +254,8 @@ void imprimePreferenciasLeitor(Leitor* leitor)
 int temGenerosComuns(Leitor* l1, Leitor* l2)
 {
     // nao sei como fazer isso ainda
-    buscaLista();
+    // imprimePreferenciasLeitor(l1);
+    // imprimePreferenciasLeitor(l2);
+    imprimeNomeLeitor(l1);
+    return temItemComumLista(l1->preferencias, l2->preferencias);
 }

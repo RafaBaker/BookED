@@ -47,6 +47,8 @@ int quantidadeLista(Lista* lista);
 
 int setaIdLista(Lista* lista, int id);
 
+int temItemComumLista(Lista* l1, Lista* l2);
+
 Celula* getCelula(Lista* lista);
 
 #endif
