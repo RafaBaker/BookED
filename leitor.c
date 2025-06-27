@@ -102,7 +102,7 @@ void desalocaLeitor(void *leitor)
         desalocaListaStruct(l->lidos);
         desalocaListaStruct(l->desejados);
         desalocaLista(l->recomendacoes);
-        desalocaListaStruct(l->preferencias);
+        desalocaLista(l->preferencias);
         desalocaLista(l->afinidades);
 
         free(leitor);

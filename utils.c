@@ -21,6 +21,14 @@ void desalocaString(void* string)
     }
 }
 
+void desalocaInt(void* inteiro)
+{
+    if (inteiro)
+    {
+        free(inteiro);
+    }
+}
+
 void imprimeInt(void* inteiro)
 {
     int i = *(int*)inteiro;

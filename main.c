@@ -68,7 +68,11 @@ int main(int argc, char const *argv[])
 
     inicializaAfinidades(b);
 
-    verificarAfinidade(b, 1, 2);
+
+    // Testando as afinidades
+    // int test1 = 7, test2 = 9;
+    // if (verificarAfinidade(b, test1, test2)) printf("Leitor de id %d tem afinidade com Leitor de id %d\n", test1, test2);
+    // else printf("Leitor de id %d NÃO tem afinidade com Leitor de id %d\n", test1, test2);
 
     if(desalocaBookEd(b)) printf("BookED desalocado com sucesso.\n");
     

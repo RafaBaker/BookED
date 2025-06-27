@@ -196,13 +196,14 @@ int listaVazia(Lista* lista)
     return lista->primeiro == NULL && lista->ultimo == NULL;
 }
 
-int desalocaLista(Lista *lista)
+void desalocaLista(void *lista)
 {
     if (lista)
     {
+        Lista* l = (Lista*)lista;
         Celula *aux;
         Celula *prox;
-        aux = lista->primeiro;
+        aux = l->primeiro;
         while (aux)
         {
             prox = aux->prox;
@@ -210,10 +211,9 @@ int desalocaLista(Lista *lista)
             free(aux);
             aux = prox;
         }
-        free(lista);
+        free (l);
     }
     lista = NULL;
-    return 1;
 }
 
 void desalocaListaStruct(void* lista)

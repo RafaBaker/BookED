@@ -37,7 +37,7 @@ void imprimeListaStruct(void* lista);
 
 int listaVazia(Lista* lista);
 
-int desalocaLista(Lista* lista);
+void desalocaLista(void* lista);
 
 void desalocaListaStruct(void* lista);
 

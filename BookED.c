@@ -219,6 +219,7 @@ int desalocaBookEd(BookED* b)
     {
         desalocaLista(b->livros);
         desalocaLista(b->leitores);
+        desalocaLista(b->afinidades);
         free(b);
     }
     b = NULL;
@@ -242,9 +243,9 @@ void inicializaAfinidades(BookED* b)
 
             if (temGenerosComuns(leitor, aux))
             {
-                int* id = malloc(sizeof(id));
+                int* id = malloc(sizeof(int));
                 *id = j;
-                insereFimLista(afLeitor, id, free, getTipoInt, imprimeInt, NULL);
+                insereFimLista(afLeitor, id, desalocaInt, getTipoInt, imprimeInt, NULL);
             }
 
         }
@@ -252,7 +253,7 @@ void inicializaAfinidades(BookED* b)
         imprimeLista(afLeitor);
         printf("\n");
         // Carregando as afinidades
-        insereFimLista(b->afinidades, afLeitor, desalocaListaStruct, getTipoLista, imprimeListaStruct, comparaLista);
+        insereFimLista(b->afinidades, afLeitor, desalocaLista, getTipoLista, imprimeListaStruct, comparaLista);
     }
     imprimeLista(b->afinidades);
 }
@@ -263,7 +264,7 @@ int verificarAfinidade(BookED* b, int idLeitorOrigem, int idLeitorDestino)
     int tamanho = quantidadeLista(b->afinidades);
     int* visitado = calloc(tamanho, sizeof(int));
 
-    int result = buscaAfinidade(b, idLeitorOrigem, idLeitorDestino, visitado);
+    int result = buscaAfinidade(b, idLeitorOrigem-1, idLeitorDestino-1, visitado);
 
     free(visitado);
 
@@ -272,13 +273,15 @@ int verificarAfinidade(BookED* b, int idLeitorOrigem, int idLeitorDestino)
 
 int buscaAfinidade(BookED* b, int idLeitorOrigem, int idLeitorDestino, int* visitado)
 {
+    if (idLeitorOrigem == idLeitorDestino) return 1;
     visitado[idLeitorOrigem] = 1;
-    Celula* aux = getCelula(buscaLista(b->afinidades, idLeitorDestino));
+    Celula* aux = getCelula(buscaLista(b->afinidades, idLeitorOrigem+1));
     for (int i = 0; aux != NULL; i++, aux = proximaCelula(aux))
     {
-        int seila = getIdLista(getItemCelula(aux));
-        printf("nada\n");
-        if (!visitado[i]);
+        int indice = getIdLista(getItemCelula(aux)) - 1;
+        // printf("nada\n");
+        if (!visitado[indice])
+            return buscaAfinidade(b, indice, idLeitorDestino, visitado);
     }
-
+    return 0;
 }
