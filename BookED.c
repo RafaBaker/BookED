@@ -224,14 +224,34 @@ int desalocaBookEd(BookED* b)
     return 1;
 }
 
-void carregaAfinidades(BookED* b)
+void inicializaAfinidades(BookED* b)
 {
     int qtdLeitores = quantidadeLista(b->leitores);
     for (int i = 1; i <= qtdLeitores; i++)
     {
-        Lista* l = inicializaLista();
-        setaIdLista(l,  i);
-        insereFimLista(b->afinidades, l, desalocaListaStruct, getTipoLista, imprimeListaStruct, NULL);
+        Lista* afLeitor = inicializaLista();
+        Leitor* leitor = buscaLista(b->leitores, i);
+
+        for (int j = 1; j <=qtdLeitores; j++)
+        {
+            if (i==j) continue;
+
+            Leitor* aux = buscaLista(b->leitores, j);
+
+            if (temGenerosComuns(leitor, aux))
+            {
+                insereFimLista(afLeitor, j, free, getTipoInt, NULL, NULL);
+            }
+
+        }
+        setaIdLista(afLeitor,  i);
+        // Carregando as afinidades
+        insereFimLista(b->afinidades, afLeitor, desalocaListaStruct, getTipoLista, imprimeListaStruct, NULL);
     }
     imprimeLista(b->afinidades);
+}
+
+void carregaAfinidades(BookED* b)
+{
+    
 }

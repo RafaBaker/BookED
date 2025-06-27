@@ -15,6 +15,8 @@ typedef int (*func_ptr_compara)(void* dado, int id);
 
 typedef int (*func_ptr_compara_contexto)(void* item, void* contexto);
 
+typedef struct Celula Celula;
+
 Lista* inicializaLista();
 
 void insereFimLista(Lista* lista, void* item, func_ptr_desaloca desaloca, func_ptr_tipo getTipo, func_ptr_imprime imprime, func_ptr_compara compara);
@@ -44,5 +46,7 @@ int getTipoLista();
 int quantidadeLista(Lista* lista);
 
 int setaIdLista(Lista* lista, int id);
+
+Celula* getCelula(Lista* lista);
 
 #endif

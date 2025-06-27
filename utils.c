@@ -25,3 +25,8 @@ int getTipoString()
 {
     return STRING;
 }
+
+int getTipoInt()
+{
+    return INT;
+}

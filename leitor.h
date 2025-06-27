@@ -41,4 +41,6 @@ void inserePreferenciaLeitor(Leitor* leitor, char* afinidade);
 
 void imprimePreferenciasLeitor(Leitor* leitor);
 
+int temGenerosComuns(Leitor* l1, Leitor* l2);
+
 #endif

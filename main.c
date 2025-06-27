@@ -66,7 +66,7 @@ int main(int argc, char const *argv[])
     removerRecomendacao(b, 2, 3, 1);
     imprimeBookEd(b);
 
-    carregaAfinidades(b);
+    inicializaAfinidades(b);
 
     if(desalocaBookEd(b)) printf("BookED desalocado com sucesso.\n");
     

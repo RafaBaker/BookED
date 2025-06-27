@@ -7,7 +7,8 @@ enum Tipo
     LEITOR,
     RECOMENDACAO,
     STRING,
-    LISTA
+    LISTA,
+    INT,
 };
 
 void imprimeString(void* string);
@@ -15,5 +16,8 @@ void imprimeString(void* string);
 void desalocaString(void* string);
 
 int getTipoString();
+
+int getTipoInt();
+
 
 #endif

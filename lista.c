@@ -6,8 +6,6 @@
 #include "utils.h"
 #include "lista.h"
 
-typedef struct Celula Celula;
-
 struct Celula
 {
     void *item;

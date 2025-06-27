@@ -36,7 +36,7 @@ void removerRecomendacao(BookED* b, int idRecomendado, int idLivro, int idRecome
 
 int desalocaBookEd(BookED* b);
 
-void carregaAfinidades(BookED* b);
+void inicializaAfinidades(BookED* b);
 
 
 #endif

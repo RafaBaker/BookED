@@ -248,8 +248,8 @@ void imprimePreferenciasLeitor(Leitor* leitor)
     printf("\n\n");
 }
 
-void constroiAfinidades(Leitor* leitor)
+int temGenerosComuns(Leitor* l1, Leitor* l2)
 {
-    
-
+    // nao sei como fazer isso ainda
+    buscaLista();
 }
