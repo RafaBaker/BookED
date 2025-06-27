@@ -38,5 +38,9 @@ int desalocaBookEd(BookED* b);
 
 void inicializaAfinidades(BookED* b);
 
+int verificarAfinidade(BookED* b, int idLeitorOrigem, int idLeitorDestino);
+
+int buscaAfinidade(BookED* b, int idLeitorOrigem, int idLeitorDestino, int* visitado);
+
 
 #endif

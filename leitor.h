@@ -43,4 +43,6 @@ void imprimePreferenciasLeitor(Leitor* leitor);
 
 int temGenerosComuns(Leitor* l1, Leitor* l2);
 
+int comparaLista(void* l1, int id);
+
 #endif

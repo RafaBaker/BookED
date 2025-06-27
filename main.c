@@ -68,6 +68,8 @@ int main(int argc, char const *argv[])
 
     inicializaAfinidades(b);
 
+    verificarAfinidade(b, 1, 2);
+
     if(desalocaBookEd(b)) printf("BookED desalocado com sucesso.\n");
     
 

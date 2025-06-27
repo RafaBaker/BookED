@@ -248,16 +248,37 @@ void inicializaAfinidades(BookED* b)
             }
 
         }
-        setaIdLista(afLeitor,  i);
+        setIdLista(afLeitor,  i);
         imprimeLista(afLeitor);
         printf("\n");
         // Carregando as afinidades
-        insereFimLista(b->afinidades, afLeitor, desalocaListaStruct, getTipoLista, imprimeListaStruct, NULL);
+        insereFimLista(b->afinidades, afLeitor, desalocaListaStruct, getTipoLista, imprimeListaStruct, comparaLista);
     }
     imprimeLista(b->afinidades);
 }
 
-void carregaAfinidades(BookED* b)
+int verificarAfinidade(BookED* b, int idLeitorOrigem, int idLeitorDestino)
 {
-    
+    if (idLeitorDestino == idLeitorOrigem) return 1;
+    int tamanho = quantidadeLista(b->afinidades);
+    int* visitado = calloc(tamanho, sizeof(int));
+
+    int result = buscaAfinidade(b, idLeitorOrigem, idLeitorDestino, visitado);
+
+    free(visitado);
+
+    return result;
+}
+
+int buscaAfinidade(BookED* b, int idLeitorOrigem, int idLeitorDestino, int* visitado)
+{
+    visitado[idLeitorOrigem] = 1;
+    Celula* aux = getCelula(buscaLista(b->afinidades, idLeitorDestino));
+    for (int i = 0; aux != NULL; i++, aux = proximaCelula(aux))
+    {
+        int seila = getIdLista(getItemCelula(aux));
+        printf("nada\n");
+        if (!visitado[i]);
+    }
+
 }

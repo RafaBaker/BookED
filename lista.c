@@ -254,9 +254,14 @@ int quantidadeLista(Lista* lista)
     return i;
 }
 
-int setaIdLista(Lista* lista, int id)
+int setIdLista(Lista* lista, int id)
 {
     lista->idLista = id;
+}
+
+int getIdLista(Lista* lista)
+{
+    return lista->idLista;
 }
 
 int temItemComumLista(Lista* l1, Lista* l2)
@@ -303,4 +308,25 @@ int temItemComumLista(Lista* l1, Lista* l2)
         aux1 = aux1->prox;
     }
     return 0;
+}
+
+int comparaLista(void* l1, int id)
+{
+    Lista* lista = (Lista*)l1;
+    return lista->idLista == id;
+}
+
+Celula* getCelula(Lista* lista)
+{
+    return lista->primeiro;
+}
+
+void* getItemCelula(Celula* celula)
+{
+    return celula->item;
+}
+
+Celula* proximaCelula(Celula* celula)
+{
+    return celula->prox;
 }

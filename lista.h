@@ -45,10 +45,16 @@ int getTipoLista();
 
 int quantidadeLista(Lista* lista);
 
-int setaIdLista(Lista* lista, int id);
+int setIdLista(Lista* lista, int id);
+
+int getIdLista(Lista* lista);
 
 int temItemComumLista(Lista* l1, Lista* l2);
 
 Celula* getCelula(Lista* lista);
+
+void* getItemCelula(Celula* celula);
+
+Celula* proximaCelula(Celula* celula);
 
 #endif
