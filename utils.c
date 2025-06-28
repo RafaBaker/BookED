@@ -5,10 +5,11 @@
 
 #include "utils.h"
 
-void imprimeString(void* string)
+void imprimeString(void* string, FILE* saida)
 {
     char* s = (char*)string;
     printf("%s ", s);
+    fprintf(saida, "%s ", s);
     // printf(" "); // ????????????
 }
 
@@ -29,10 +30,11 @@ void desalocaInt(void* inteiro)
     }
 }
 
-void imprimeInt(void* inteiro)
+void imprimeInt(void* inteiro, FILE* saida)
 {
     int i = *(int*)inteiro;
     printf("%d ", i);
+    fprintf(saida, "%d ", i);
 }
 
 int getTipoString()

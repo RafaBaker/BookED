@@ -9,7 +9,7 @@ typedef void (*func_ptr_desaloca)(void* dado);
 
 typedef int (*func_ptr_tipo)();
 
-typedef void (*func_ptr_imprime)(void* dado);
+typedef void (*func_ptr_imprime)(void* dado, FILE* saida);
 
 typedef int (*func_ptr_compara)(void* dado, int id);
 
@@ -29,9 +29,9 @@ void* buscaListaComContexto(Lista* lista, func_ptr_compara_contexto compara, voi
 
 void removeListaComContexto(Lista* lista, func_ptr_compara_contexto compara, void* contexto);
 
-void imprimeLista(Lista* lista);
+void imprimeLista(Lista* lista, FILE* saida);
 
-void imprimeListaStruct(void* lista);
+void imprimeListaStruct(void* lista, FILE* saida);
 
 // void imprimeListaLeitores(Lista *lista);
 

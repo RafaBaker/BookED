@@ -29,15 +29,21 @@ Livro* criaLivro(int id, char* titulo, char* autor, char* genero, int ano)
     return livro;
 }
 
-void imprimeLivro(void* livro)
+void imprimeLivro(void* livro, FILE* saida)
 {
     Livro* l = (Livro*)livro;
     printf("%s", l->titulo);
+    fprintf(saida, "%s", l->titulo);
 }
 
 int getIdLivro(Livro* livro)
 {
     return livro->id;
+}
+
+char* getTituloLivro(Livro* livro)
+{
+    return livro->titulo;
 }
 
 void desalocaLivro(void* livro)

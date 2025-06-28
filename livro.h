@@ -5,9 +5,11 @@ typedef struct Livro Livro;
 
 Livro* criaLivro(int id, char* titulo, char* autor, char* genero, int ano);
 
-void imprimeLivro(void* livro);
+void imprimeLivro(void* livro, FILE* saida);
 
 int getIdLivro(Livro* livro);
+
+char* getTituloLivro(Livro* livro);
 
 void desalocaLivro(void* livro);
 

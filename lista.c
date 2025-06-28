@@ -66,7 +66,7 @@ void *buscaLista(Lista *lista, int id)
 
     if (!aux)
     {
-        printf("Item não encontrado\n");
+        // printf("Item não encontrado\n");
         return NULL;
     }
     return aux->item;
@@ -157,23 +157,25 @@ void removeListaComContexto(Lista* lista, func_ptr_compara_contexto compara, voi
     free(aux);
 }
 
-void imprimeLista(Lista *lista)
+void imprimeLista(Lista *lista, FILE* saida)
 {
     if (!lista || !lista->primeiro) return;
 
     Celula *aux = lista->primeiro;
     while (aux)
     {
-        aux->imprime(aux->item);
-        if (aux->getTipo() == LIVRO && aux != lista->ultimo)
+        aux->imprime(aux->item, saida);
+        if ((aux->getTipo() == LIVRO || aux->getTipo() == RECOMENDACAO) && aux != lista->ultimo)
         {
             printf(", ");
+            fprintf(saida, ", ");
         }
         aux = aux->prox;
     }
 }
 
-void imprimeListaStruct(void* lista)
+
+void imprimeListaStruct(void* lista, FILE* saida)
 {
     Lista* l = (Lista*)lista;
     printf("Lista de ID %d\n", l->idLista);

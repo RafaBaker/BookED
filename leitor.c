@@ -35,20 +35,22 @@ static int comparaRecomendacaoComContexto(void* item, void* contexto) {
 }
 
 // Função para imprimir uma recomendação
-static void imprimeRecomendacaoLivro(void *rec)
+static void imprimeRecomendacaoLivro(void *rec, FILE* saida)
 {
     Recomendacao *recomendacao = (Recomendacao *)rec;
-    imprimeLivro(recomendacao->livro); // Supondo que você tenha esta função
+    imprimeLivro(recomendacao->livro, saida); // Supondo que você tenha esta função
 }
 
 // Função para imprimir uma recomendação
-static void imprimeRecomendacao(void *rec)
+static void imprimeRecomendacao(void *rec, FILE* saida)
 {
     Recomendacao *recomendacao = (Recomendacao *)rec;
-    printf("Livro recomendado: ");
-    imprimeLivro(recomendacao->livro); // Supondo que você tenha esta função
-    printf("Recomendado por ");
-    imprimeLeitor(recomendacao->recomendador);
+    printf("Livro destinatario: ");
+    fprintf(saida, "Livro destinatario: ");
+    imprimeLivro(recomendacao->livro, saida); // Supondo que você tenha esta função
+    printf("Destinatario por ");
+    fprintf(saida, "Destinatario por ");
+    imprimeLeitor(recomendacao->recomendador, saida);
 }
 
 // Função para desalocar uma recomendação
@@ -115,10 +117,16 @@ int getTipoLeitor()
     return LEITOR;
 }
 
-void imprimeNomeLeitor(void *leitor)
+char* getNomeLeitor(Leitor* leitor)
+{
+    return leitor->nome;
+}
+
+void imprimeNomeLeitor(void *leitor, FILE* saida)
 {
     Leitor *l = (Leitor *)leitor;
     printf("%s", l->nome);
+    fprintf(saida, "%s", l->nome);
 }
 
 void imprimeIdLeitor(void *leitor)
@@ -127,24 +135,30 @@ void imprimeIdLeitor(void *leitor)
     printf("%d", l->id);
 }
 
-void imprimeLeitor(void *leitor)
+void imprimeLeitor(void *leitor, FILE* saida)
 {
     Leitor *l = (Leitor *)leitor;
     printf("\nLeitor: ");
-    imprimeNomeLeitor(leitor);
+    fprintf(saida, "\nLeitor: ");
+
+    imprimeNomeLeitor(leitor, saida);
     printf("\n");
+    fprintf(saida, "\n");
     
     //Livros lidos
-    imprimeLivrosLidosLeitor(l);
+    imprimeLivrosLidosLeitor(l, saida);
 
     //Livros desejados
-    imprimeLivrosDesejadosLeitor(l);
+    imprimeLivrosDesejadosLeitor(l, saida);
 
     //Livros recomendados
-    imprimeRecomendacoesLeitor(l);
+    imprimeRecomendacoesLeitor(l, saida);
 
     //Preferencias
-    imprimePreferenciasLeitor(l);
+    imprimePreferenciasLeitor(l, saida);
+
+    // Afinidades
+    // imprimeAfinidadesLeitor(l, saida);
 
 }
 
@@ -154,58 +168,93 @@ int comparaIDLeitor(void *leitor, int id)
     return l->id == id;
 }
 
-void adicionaLivroLidoLeitor(Leitor *leitor, Livro *livro)
+int adicionaLivroLidoLeitor(Leitor *leitor, Livro *livro)
 {
-    insereFimLista(leitor->lidos, livro, desalocaLivro, getTipoLivro, imprimeLivro, comparaIDLivro);
+    if (buscaLista(leitor->lidos, getIdLivro(livro)) == NULL)
+    {
+        insereFimLista(leitor->lidos, livro, desalocaLivro, getTipoLivro, imprimeLivro, comparaIDLivro);
+        return 1;
+    }
+    return 0;
 }
 
-void imprimeLivrosLidosLeitor(Leitor *leitor)
+void imprimeLivrosLidosLeitor(Leitor *leitor, FILE* saida)
 {
     printf("Lidos: ");
-    imprimeLista(leitor->lidos);
+    fprintf(saida, "Lidos: ");
+    imprimeLista(leitor->lidos, saida);
     printf("\n");
+    fprintf(saida, "\n");
 }
 
-void adicionaLivroDesejadoLeitor(Leitor *leitor, Livro *livro)
+int adicionaLivroDesejadoLeitor(Leitor *leitor, Livro *livro)
 {
     // Vendo se o livro não está na lista de lidos
     if (!buscaLista(leitor->lidos, getIdLivro(livro)))
     {
-        insereFimLista(leitor->desejados, livro, desalocaLivro, getTipoLivro, imprimeLivro, comparaIDLivro);
-        printf("Livro adicionado aos recomendados com sucesso!\n");
+        // Vendo se o livro já não está na lista de desejados
+        if (!buscaLista(leitor->desejados, getIdLivro(livro)))
+        {
+            insereFimLista(leitor->desejados, livro, desalocaLivro, getTipoLivro, imprimeLivro, comparaIDLivro);
+            printf("Livro adicionado aos desejados com sucesso!\n");
+        }
+        else
+        {
+            printf("Erro ao cadastrar livro nas recomendações: o Livro já está nos desejados.\n");
+            return 0;
+        }
     }
     else
     {
         printf("Erro ao cadastrar livro nas recomendações: o Livro já foi lido.\n");
+        return 0;
     }
+    return 1;
 }
 
-void imprimeLivrosDesejadosLeitor(Leitor *leitor)
+void imprimeLivrosDesejadosLeitor(Leitor *leitor, FILE* saida)
 {
     printf("Desejados: ");
-    imprimeLista(leitor->desejados);
+    fprintf(saida, "Desejados: ");
+    imprimeLista(leitor->desejados, saida);
     printf("\n");
+    fprintf(saida, "\n");
 }
 
-void adicionaRecomendacao(Leitor *destinatario, Livro *livro, Leitor *recomendador)
+/**
+ * RETORNA 1 = DEU CERTO
+ * RETORNA 0 = DEU ERRADO (LIVRO JÁ FOI LIDO)
+ * RETORNA -1 = DEU ERRADO (LIVRO JÁ ESTÁ NOS DESEJADOS)
+ */
+int adicionaRecomendacao(Leitor *destinatario, Livro *livro, Leitor *recomendador)
 {
     // Cria a recomendação
     Recomendacao *nova_rec = malloc(sizeof(Recomendacao));
     nova_rec->livro = livro;
     nova_rec->recomendador = recomendador;
 
+    if (buscaLista(destinatario->lidos, getIdLivro(livro)))
+    {
+        return 0;
+    }
+    else if (buscaLista(destinatario->desejados, getIdLivro(livro)))
+    return -1;
     // Insere na lista genérica usando as funções específicas
     insereFimLista(destinatario->recomendacoes, nova_rec, desalocaRecomendacao, getTipoRec, imprimeRecomendacaoLivro, comparaRecomendacao);
+    return 1;
+
 }
 
-void imprimeRecomendacoesLeitor(Leitor* leitor)
+void imprimeRecomendacoesLeitor(Leitor* leitor, FILE* saida)
 {
     printf("Recomendacoes: ");
-    imprimeLista(leitor->recomendacoes);
+    fprintf(saida, "Recomendacoes: ");
+    imprimeLista(leitor->recomendacoes, saida);
     printf("\n");
+    fprintf(saida, "\n");
 }
 
-void aceitaRecomendacaoLeitor(Leitor *leitor, int idLivro, int idRecomendador)
+int aceitaRecomendacaoLeitor(Leitor *leitor, int idLivro, int idRecomendador)
 {
     // Busca a recomendação na lista
     ContextoRecomendacao ctx = {idLivro, idRecomendador};
@@ -222,10 +271,12 @@ void aceitaRecomendacaoLeitor(Leitor *leitor, int idLivro, int idRecomendador)
         // Remove da lista de recomendações
         removeListaComContexto(leitor->recomendacoes, comparaRecomendacaoComContexto, &ctx);
         desalocaRecomendacao(rec);
+        return 1;
     }
+    return 0;
 }
 
-void removerRecomendacaoLeitor(Leitor *leitor, int idLivro, int idRecomendador)
+int removerRecomendacaoLeitor(Leitor *leitor, int idLivro, int idRecomendador)
 {
     // Busca a recomendação na lista
     ContextoRecomendacao ctx = {idLivro, idRecomendador};
@@ -236,7 +287,9 @@ void removerRecomendacaoLeitor(Leitor *leitor, int idLivro, int idRecomendador)
         // Remove da lista de recomendações
         removeListaComContexto(leitor->recomendacoes, comparaRecomendacaoComContexto, &ctx);
         desalocaRecomendacao(rec);
+        return 1;
     }
+    return 0;
 }
 
 void inserePreferenciaLeitor(Leitor* leitor, char* afinidade)
@@ -244,11 +297,13 @@ void inserePreferenciaLeitor(Leitor* leitor, char* afinidade)
     insereFimLista(leitor->preferencias, afinidade, desalocaString, getTipoString, imprimeString, NULL);
 }
 
-void imprimePreferenciasLeitor(Leitor* leitor)
+void imprimePreferenciasLeitor(Leitor* leitor, FILE* saida)
 {
     printf("Preferencias: ");
-    imprimeLista(leitor->preferencias);
+    fprintf(saida, "Preferencias: ");
+    imprimeLista(leitor->preferencias, saida);
     printf("\n\n");
+    fprintf(saida, "\n\n");
 }
 
 int temGenerosComuns(Leitor* l1, Leitor* l2)

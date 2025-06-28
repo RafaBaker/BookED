@@ -13,33 +13,35 @@ void desalocaLeitor(void* leitor);
 
 int getTipoLeitor();
 
-void imprimeNomeLeitor(void *leitor);
+char* getNomeLeitor(Leitor* leitor);
+
+void imprimeNomeLeitor(void *leitor, FILE* saida);
 
 void imprimeIdLeitor(void *leitor);
 
-void imprimeLeitor(void* leitor);
+void imprimeLeitor(void* leitor, FILE* saida);
 
 int comparaIDLeitor(void* leitor, int id);
 
-void adicionaLivroLidoLeitor(Leitor* leitor, Livro* livro);
+int adicionaLivroLidoLeitor(Leitor* leitor, Livro* livro);
 
-void imprimeLivrosLidosLeitor(Leitor* leitor);
+void imprimeLivrosLidosLeitor(Leitor* leitor, FILE* saida);
 
-void adicionaLivroDesejadoLeitor(Leitor* leitor, Livro* livro);
+int adicionaLivroDesejadoLeitor(Leitor* leitor, Livro* livro);
 
-void imprimeLivrosDesejadosLeitor(Leitor* leitor);
+void imprimeLivrosDesejadosLeitor(Leitor* leitor, FILE* saida);
 
-void adicionaRecomendacao(Leitor *destinatario, Livro *livro, Leitor *recomendador);
+int adicionaRecomendacao(Leitor *destinatario, Livro *livro, Leitor *recomendador);
 
-void imprimeRecomendacoesLeitor(Leitor* leitor);
+void imprimeRecomendacoesLeitor(Leitor* leitor, FILE* saida);
 
-void aceitaRecomendacaoLeitor(Leitor *leitor, int idLivro, int idRecomendador);
+int aceitaRecomendacaoLeitor(Leitor *leitor, int idLivro, int idRecomendador);
 
-void removerRecomendacaoLeitor(Leitor *leitor, int idLivro, int idRecomendador);
+int removerRecomendacaoLeitor(Leitor *leitor, int idLivro, int idRecomendador);
 
 void inserePreferenciaLeitor(Leitor* leitor, char* afinidade);
 
-void imprimePreferenciasLeitor(Leitor* leitor);
+void imprimePreferenciasLeitor(Leitor* leitor, FILE* saida);
 
 int temGenerosComuns(Leitor* l1, Leitor* l2);
 

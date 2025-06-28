@@ -22,25 +22,27 @@ void imprimeLeitores(BookED* b);
 
 void imprimeLivros(BookED* b);
 
-void imprimeBookEd(BookED* b);
+void imprimeBookEd(BookED* b, FILE* saida);
 
-void adicionaLivroLido(BookED* b, int idLeitor, int idLivro);
+void adicionaLivroLido(BookED* b, int idLeitor, int idLivro, FILE* saida);
 
-void adicionarLivroDesejado(BookED* b, int idLeitor, int idLivro);
+void adicionarLivroDesejado(BookED* b, int idLeitor, int idLivro, FILE* saida);
 
-void recomendarLivro(BookED* b, int idRecomendador, int idLivro, int idRecomendado);
+void recomendarLivro(BookED* b, int idRecomendador, int idLivro, int idDestinatario, FILE* saida);
 
-void aceitarRecomendacao(BookED* b, int idRecomendado, int idLivro, int idRecomendador);
+void aceitarRecomendacao(BookED* b, int idDestinatario, int idLivro, int idRecomendador, FILE* saida);
 
-void removerRecomendacao(BookED* b, int idRecomendado, int idLivro, int idRecomendador);
+void removerRecomendacao(BookED* b, int idDestinatario, int idLivro, int idRecomendador, FILE* saida);
 
 int desalocaBookEd(BookED* b);
 
 void inicializaAfinidades(BookED* b);
 
-int verificarAfinidade(BookED* b, int idLeitorOrigem, int idLeitorDestino);
+void verificarAfinidade(BookED* b, int idLeitorOrigem, int idLeitorDestino, FILE* saida);
 
-int buscaAfinidade(BookED* b, int idLeitorOrigem, int idLeitorDestino, int* visitado);
+static int buscaAfinidade(BookED* b, int idLeitorOrigem, int idLeitorDestino, int* visitado);
+
+void executaBookED(BookED* b, FILE* pComandos, FILE* pSaida);
 
 
 #endif

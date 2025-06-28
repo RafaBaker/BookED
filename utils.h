@@ -11,13 +11,13 @@ enum Tipo
     INT,
 };
 
-void imprimeString(void* string);
+void imprimeString(void* string, FILE* saida);
 
 void desalocaString(void* string);
 
 void desalocaInt(void* inteiro);
 
-void imprimeInt(void* inteiro);
+void imprimeInt(void* inteiro, FILE* saida);
 
 int getTipoString();
 
