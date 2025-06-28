@@ -200,7 +200,7 @@ void recomendarLivro(BookED* b, int idRecomendador, int idLivro, int idDestinata
 
 void aceitarRecomendacao(BookED* b, int idDestinatario, int idLivro, int idRecomendador, FILE* saida)
 {
-    Leitor* destinatario = (Leitor*)buscaLista(b->leitores, idDestinatario);;
+    Leitor* destinatario = (Leitor*)buscaLista(b->leitores, idDestinatario);
     Leitor* recomendador = (Leitor*)buscaLista(b->leitores, idRecomendador);
     Livro* livro = (Livro*)buscaLista(b->livros, idLivro);
 
@@ -277,6 +277,37 @@ int desalocaBookEd(BookED* b)
     return 1;
 }
 
+int descobrirLivrosEmComum(BookED* b, int id1, int id2, FILE* saida)
+{
+    Leitor* l1 = (Leitor*)buscaLista(b->leitores, id1);
+    Leitor* l2 = (Leitor*)buscaLista(b->leitores, id2);
+    
+    if (!l1)
+    {
+        fprintf(saida, "Erro: Leitor com ID %d não encontrado\n", id1);
+        return 0;
+    }
+    if (!l2)
+    {
+        fprintf(saida, "Erro: Leitor com ID %d não encontrado\n", id2);
+        return 0;
+    }
+
+    Lista* lista = temLivrosComuns(l1, l2);
+    
+    fprintf(saida, "Livros em comum entre %s e %s: ", getNomeLeitor(l1), getNomeLeitor(l2));
+    if (listaVazia(lista))
+    {
+        fprintf(saida, "Nenhum livro em comum\n");
+    }
+    else
+    {
+        imprimeLista(lista, saida);
+        fprintf(saida, "\n");
+    }
+    desalocaListaStruct(lista);
+}
+
 void inicializaAfinidades(BookED* b)
 {
     FILE* pTeste = fopen("teste.txt", "w");
@@ -347,7 +378,7 @@ void verificarAfinidade(BookED* b, int idLeitorOrigem, int idLeitorDestino, FILE
         fprintf(saida, "Existe afinidade entre %s e %s\n", getNomeLeitor(l1), getNomeLeitor(l2));
     else
     {
-        fprintf(saida, "NÃO existe afinidade entre %s e %s\n", getNomeLeitor(l1), getNomeLeitor(l2));
+        fprintf(saida, "Não existe afinidade entre %s e %s\n", getNomeLeitor(l1), getNomeLeitor(l2));
     }
 
     if (visitado) free(visitado);
@@ -401,8 +432,7 @@ void executaBookED(BookED* b, FILE* pComandos, FILE* pSaida)
             removerRecomendacao(b, id1, id2, id3, pSaida);
             break;
         case 6:
-            printf("Livros em comum WIP\n");
-            fprintf(pSaida, "Livros em comum WIP\n");
+            descobrirLivrosEmComum(b, id1, id3, pSaida);
             break;
         case 7:
             verificarAfinidade(b, id1, id3, pSaida);

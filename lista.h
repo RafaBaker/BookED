@@ -49,7 +49,7 @@ int setIdLista(Lista* lista, int id);
 
 int getIdLista(Lista* lista);
 
-int temItemComumLista(Lista* l1, Lista* l2);
+Lista* temItemComumLista(Lista* l1, Lista* l2);
 
 Celula* getCelula(Lista* lista);
 

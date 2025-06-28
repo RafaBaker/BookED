@@ -45,6 +45,8 @@ void imprimePreferenciasLeitor(Leitor* leitor, FILE* saida);
 
 int temGenerosComuns(Leitor* l1, Leitor* l2);
 
+Lista* temLivrosComuns(Leitor* l1, Leitor* l2);
+
 void adicionaAfinidadeLeitor(Leitor* l1, Leitor* l2);
 
 void imprimeAfinidadesLeitor(Leitor* leitor, FILE* saida);

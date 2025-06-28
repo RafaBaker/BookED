@@ -308,11 +308,17 @@ void imprimePreferenciasLeitor(Leitor* leitor, FILE* saida)
 
 int temGenerosComuns(Leitor* l1, Leitor* l2)
 {
-    // nao sei como fazer isso ainda
-    // imprimePreferenciasLeitor(l1);
-    // imprimePreferenciasLeitor(l2);
-    // imprimeNomeLeitor(l1);
-    return temItemComumLista(l1->preferencias, l2->preferencias);
+    Lista* lista = temItemComumLista(l1->preferencias, l2->preferencias);
+    int result = 1;
+    if (listaVazia(lista))
+        result = 0;
+    desalocaListaStruct(lista);
+    return result;
+}
+
+Lista* temLivrosComuns(Leitor* l1, Leitor* l2)
+{
+    return temItemComumLista(l1->lidos, l2->lidos);
 }
 
 void adicionaAfinidadeLeitor(Leitor* l1, Leitor* l2)

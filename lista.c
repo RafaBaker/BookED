@@ -3,6 +3,7 @@
 #include <string.h>
 #include <assert.h>
 
+#include "livro.h"
 #include "utils.h"
 #include "lista.h"
 
@@ -267,7 +268,7 @@ int getIdLista(Lista* lista)
     return lista->idLista;
 }
 
-int temItemComumLista(Lista* l1, Lista* l2)
+Lista* temItemComumLista(Lista* l1, Lista* l2)
 {
     Celula* aux1 = l1->primeiro;
     Celula* aux2 = l2->primeiro;
@@ -275,17 +276,18 @@ int temItemComumLista(Lista* l1, Lista* l2)
 
     if (!aux1 && !aux2)
     {
-        return 1;
+        return NULL;
     }
 
     if (!aux1 || !aux2)
     {
-        return 0;
+        return NULL;
     }
 
-    qtdL1 = quantidadeLista(l1);
-    qtdL2 = quantidadeLista(l2);
+    // qtdL1 = quantidadeLista(l1);
+    // qtdL2 = quantidadeLista(l2);
 
+    Lista* nova = inicializaLista();
 
     // imprimeLista(l1);
     while (aux1)
@@ -300,17 +302,25 @@ int temItemComumLista(Lista* l1, Lista* l2)
             // printf("aux2: ");
             // imprimeString(aux2->item);
             // printf("\n");
-
-            if (!strcmp(aux1->item, aux2->item))
+            if (aux1->getTipo() == STRING)
             {
-                return 1;
+                if (!strcmp(aux1->item, aux2->item))
+                {
+                    insereFimLista(nova, aux2->item, desalocaString, getTipoString, imprimeString, NULL);
+                }
+            }
+            else
+            {
+                if (aux1->item == aux2->item)
+                {
+                    insereFimLista(nova, aux2->item, NULL, getTipoLivro, imprimeLivro, comparaIDLivro);
+                }
             }
             aux2 = aux2->prox;
         }
-        // Tem que ajeitar isso aqui para usar o "compara"
         aux1 = aux1->prox;
     }
-    return 0;
+    return nova;
 }
 
 int comparaLista(void* l1, int id)
