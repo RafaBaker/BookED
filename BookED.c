@@ -113,6 +113,7 @@ void adicionaLivroLido(BookED* b, int idLeitor, int idLivro, FILE* saida)
     if (!leitor)
     {
         fprintf(saida, "Erro: Leitor com ID %d não encontrado\n", idLeitor);
+        printf("Erro: Leitor com ID %d não encontrado\n", idLeitor);
         return;
     }
 
@@ -120,6 +121,7 @@ void adicionaLivroLido(BookED* b, int idLeitor, int idLivro, FILE* saida)
     if (!livro)
     {
         fprintf(saida, "Erro: Livro com ID %d não encontrado\n", idLivro);
+        printf("Erro: Livro com ID %d não encontrado\n", idLivro);
         return;
     }
     // if (livro)
@@ -127,9 +129,15 @@ void adicionaLivroLido(BookED* b, int idLeitor, int idLivro, FILE* saida)
     int f = 0;
     f = adicionaLivroLidoLeitor(leitor, livro);
     if (f)
+    {
         fprintf(saida, "%s leu \"%s\"\n", getNomeLeitor(leitor), getTituloLivro(livro));
+        printf("%s leu \"%s\"\n", getNomeLeitor(leitor), getTituloLivro(livro));
+    }
     else
+    {
         fprintf(saida, "%s já leu \"%s\"\n", getNomeLeitor(leitor), getTituloLivro(livro));
+        printf("%s já leu \"%s\"\n", getNomeLeitor(leitor), getTituloLivro(livro));
+    }
     //imprimeLivrosLidosLeitor(leitor);
 
 }
@@ -169,17 +177,20 @@ void recomendarLivro(BookED* b, int idRecomendador, int idLivro, int idDestinata
 
     if (!recomendador)
     {
+        fprintf(saida, "Erro: Leitor recomendador com ID %d não encontrado\n", idRecomendador);
         printf("Recomendador não achado\n");
         return;
     }
     if (!destinatario)
     {
+        fprintf(saida, "Erro: Leitor destinatário com ID %d não encontrado\n", idDestinatario);
         printf("Destinatario não achado\n");
         return;
     }
     if (!livro)
     {
-        printf("Livro não encontrado para recomendação\n");
+        fprintf(saida, "Erro: Livro com ID %d não encontrado\n", idLivro);
+        printf("Erro: Livro com ID %d não encontrado\n", idLivro);
         return;
     }
     if (destinatario == recomendador)
@@ -211,11 +222,12 @@ void aceitarRecomendacao(BookED* b, int idDestinatario, int idLivro, int idRecom
     }
     if (!destinatario)
     {
-        fprintf(saida, "Erro: Leitor destinatário com ID %d não encontrado\n", idDestinatario);
+        fprintf(saida, "Erro: Leitor com ID %d não encontrado\n", idDestinatario);
         return;
     }
     if (!livro)
     {
+        fprintf(saida, "%s não possui recomendação do livro ID %d feita por %s\n", getNomeLeitor(destinatario), idLivro, getNomeLeitor(recomendador));
         printf("Livro não encontrado para recomendação\n");
         return;
     }
@@ -236,16 +248,19 @@ void removerRecomendacao(BookED* b, int idDestinatario, int idLivro, int idRecom
 
     if (!recomendador)
     {
+        fprintf(saida, "Erro: Leitor recomendador com ID %d não encontrado\n", idRecomendador);
         printf("Recomendador não achado\n");
         return;
     }
     if (!destinatario)
     {
+        fprintf(saida, "Erro: Leitor com ID %d não encontrado\n", idDestinatario);
         printf("Destinatario não achado\n");
         return;
     }
     if (!livro)
     {
+        fprintf(saida, "%s não possui recomendação do livro ID %d feita por %s\n", getNomeLeitor(destinatario), idLivro, getNomeLeitor(recomendador));
         printf("Livro não encontrado para recomendação\n");
         return;
     }
@@ -340,6 +355,7 @@ void inicializaAfinidades(BookED* b)
         // Carregando as afinidades
         insereFimLista(b->afinidades, afLeitor, desalocaLista, getTipoLista, imprimeListaStruct, comparaLista);
     }
+    fclose(pTeste);
 
     // imprimeLista(b->afinidades, NULL);
 }

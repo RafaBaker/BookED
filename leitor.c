@@ -235,10 +235,14 @@ int adicionaRecomendacao(Leitor *destinatario, Livro *livro, Leitor *recomendado
 
     if (buscaLista(destinatario->lidos, getIdLivro(livro)))
     {
+        desalocaRecomendacao(nova_rec);
         return 0;
     }
     else if (buscaLista(destinatario->desejados, getIdLivro(livro)))
-    return -1;
+    {
+        desalocaRecomendacao(nova_rec);
+        return -1;
+    }
     // Insere na lista genérica usando as funções específicas
     insereFimLista(destinatario->recomendacoes, nova_rec, desalocaRecomendacao, getTipoRec, imprimeRecomendacaoLivro, comparaRecomendacao);
     return 1;
