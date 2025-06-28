@@ -7,7 +7,7 @@
       "request": "launch",
       "program": "${workspaceFolder}/prog",
       "args": [
-        "test2"
+        "test0"
       ],
       "stopAtEntry": false,
       "cwd": "${fileDirname}",

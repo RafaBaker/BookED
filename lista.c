@@ -165,10 +165,11 @@ void imprimeLista(Lista *lista, FILE* saida)
     while (aux)
     {
         aux->imprime(aux->item, saida);
-        if ((aux->getTipo() == LIVRO || aux->getTipo() == RECOMENDACAO) && aux != lista->ultimo)
+        if ((aux->getTipo() == LIVRO || aux->getTipo() == RECOMENDACAO || aux->getTipo() == AFINIDADE || aux->getTipo() == STRING) && aux != lista->ultimo)
         {
             printf(", ");
-            fprintf(saida, ", ");
+            if (saida)
+                fprintf(saida, ", ");
         }
         aux = aux->prox;
     }
@@ -209,7 +210,7 @@ void desalocaLista(void *lista)
         while (aux)
         {
             prox = aux->prox;
-            aux->desaloca(aux->item);
+            if (aux->desaloca) aux->desaloca(aux->item);
             free(aux);
             aux = prox;
         }

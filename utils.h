@@ -9,6 +9,7 @@ enum Tipo
     STRING,
     LISTA,
     INT,
+    AFINIDADE,
 };
 
 void imprimeString(void* string, FILE* saida);
@@ -23,5 +24,6 @@ int getTipoString();
 
 int getTipoInt();
 
+int getTipoAfinidade();
 
 #endif

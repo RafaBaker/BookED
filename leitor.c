@@ -154,11 +154,11 @@ void imprimeLeitor(void *leitor, FILE* saida)
     //Livros recomendados
     imprimeRecomendacoesLeitor(l, saida);
 
-    //Preferencias
-    imprimePreferenciasLeitor(l, saida);
+    // //Preferencias
+    // imprimePreferenciasLeitor(l, saida);
 
     // Afinidades
-    // imprimeAfinidadesLeitor(l, saida);
+    imprimeAfinidadesLeitor(l, saida);
 
 }
 
@@ -302,8 +302,8 @@ void imprimePreferenciasLeitor(Leitor* leitor, FILE* saida)
     printf("Preferencias: ");
     fprintf(saida, "Preferencias: ");
     imprimeLista(leitor->preferencias, saida);
-    printf("\n\n");
-    fprintf(saida, "\n\n");
+    printf("\n");
+    fprintf(saida, "\n");
 }
 
 int temGenerosComuns(Leitor* l1, Leitor* l2)
@@ -313,4 +313,18 @@ int temGenerosComuns(Leitor* l1, Leitor* l2)
     // imprimePreferenciasLeitor(l2);
     // imprimeNomeLeitor(l1);
     return temItemComumLista(l1->preferencias, l2->preferencias);
+}
+
+void adicionaAfinidadeLeitor(Leitor* l1, Leitor* l2)
+{
+    insereFimLista(l1->afinidades, l2, NULL, getTipoAfinidade, imprimeNomeLeitor, comparaIDLeitor);
+}
+
+void imprimeAfinidadesLeitor(Leitor* leitor, FILE* saida)
+{
+    printf("Afinidades: ");
+    fprintf(saida, "Afinidades: ");
+    imprimeLista(leitor->afinidades, saida);
+    printf("\n");
+    fprintf(saida, "\n");
 }

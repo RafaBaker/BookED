@@ -57,4 +57,6 @@ void* getItemCelula(Celula* celula);
 
 Celula* proximaCelula(Celula* celula);
 
+int comparaLista(void* l1, int id);
+
 #endif

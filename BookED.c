@@ -279,6 +279,7 @@ int desalocaBookEd(BookED* b)
 
 void inicializaAfinidades(BookED* b)
 {
+    FILE* pTeste = fopen("teste.txt", "w");
     int qtdLeitores = quantidadeLista(b->leitores);
     for (int i = 1; i <= qtdLeitores; i++)
     {
@@ -294,20 +295,22 @@ void inicializaAfinidades(BookED* b)
 
             if (temGenerosComuns(leitor, aux))
             {
-                int* id = malloc(sizeof(int));
-                *id = j;
-                insereFimLista(afLeitor, id, desalocaInt, getTipoInt, imprimeInt, NULL);
+                // int* id = malloc(sizeof(int));
+                // *id = j;
+                // insereFimLista(afLeitor, id, desalocaInt, getTipoInt, imprimeInt, NULL);
+                insereFimLista(afLeitor, aux, NULL, getTipoLeitor, imprimeNomeLeitor, comparaIDLeitor);
+                adicionaAfinidadeLeitor(leitor, aux);
             }
 
         }
         setIdLista(afLeitor,  i);
-        // imprimeLista(afLeitor);
-        // printf("\n");
+        imprimeLista(afLeitor, pTeste);
+        printf("\n");
         // Carregando as afinidades
         insereFimLista(b->afinidades, afLeitor, desalocaLista, getTipoLista, imprimeListaStruct, comparaLista);
     }
 
-    // imprimeLista(b->afinidades);
+    // imprimeLista(b->afinidades, NULL);
 }
 
 void verificarAfinidade(BookED* b, int idLeitorOrigem, int idLeitorDestino, FILE* saida)

@@ -8,8 +8,8 @@
 void imprimeString(void* string, FILE* saida)
 {
     char* s = (char*)string;
-    printf("%s ", s);
-    fprintf(saida, "%s ", s);
+    printf("%s", s);
+    fprintf(saida, "%s", s);
     // printf(" "); // ????????????
 }
 
@@ -45,4 +45,9 @@ int getTipoString()
 int getTipoInt()
 {
     return INT;
+}
+
+int getTipoAfinidade()
+{
+    return AFINIDADE;
 }
