@@ -178,13 +178,13 @@ void recomendarLivro(BookED* b, int idRecomendador, int idLivro, int idDestinata
     if (!recomendador)
     {
         fprintf(saida, "Erro: Leitor recomendador com ID %d não encontrado\n", idRecomendador);
-        printf("Recomendador não achado\n");
+        printf("Erro: Leitor recomendador com ID %d não encontrado\n", idRecomendador);
         return;
     }
     if (!destinatario)
     {
         fprintf(saida, "Erro: Leitor destinatário com ID %d não encontrado\n", idDestinatario);
-        printf("Destinatario não achado\n");
+        printf("Erro: Leitor destinatário com ID %d não encontrado\n", idDestinatario);
         return;
     }
     if (!livro)
@@ -350,8 +350,8 @@ void inicializaAfinidades(BookED* b)
 
         }
         setIdLista(afLeitor,  i);
-        imprimeLista(afLeitor, pTeste);
-        printf("\n");
+        // imprimeLista(afLeitor, pTeste);
+        // printf("\n");
         // Carregando as afinidades
         insereFimLista(b->afinidades, afLeitor, desalocaLista, getTipoLista, imprimeListaStruct, comparaLista);
     }
@@ -401,18 +401,21 @@ void verificarAfinidade(BookED* b, int idLeitorOrigem, int idLeitorDestino, FILE
 
 }
 
+// Busca em profundidade pelo grafo
 static int buscaAfinidade(BookED* b, int idLeitorOrigem, int idLeitorDestino, int* visitado)
 {
     int result = 0;
     if (idLeitorOrigem == idLeitorDestino) return 1;
     visitado[idLeitorOrigem] = 1;
     Celula* aux = getCelula(buscaLista(b->afinidades, idLeitorOrigem+1));
-    for (int i = 0; aux != NULL; i++, aux = proximaCelula(aux))
+    while (aux)
     {
         int indice = getIdLista(getItemCelula(aux)) - 1;
         // printf("nada\n");
         if (!visitado[indice])
             result += buscaAfinidade(b, indice, idLeitorDestino, visitado);
+
+        aux = proximaCelula(aux);
     }
     return result;
 }

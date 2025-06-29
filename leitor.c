@@ -196,7 +196,7 @@ int adicionaLivroDesejadoLeitor(Leitor *leitor, Livro *livro)
         if (!buscaLista(leitor->desejados, getIdLivro(livro)))
         {
             insereFimLista(leitor->desejados, livro, desalocaLivro, getTipoLivro, imprimeLivro, comparaIDLivro);
-            printf("Livro adicionado aos desejados com sucesso!\n");
+            // printf("Livro adicionado aos desejados com sucesso!\n");
         }
         else
         {

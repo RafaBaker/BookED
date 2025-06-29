@@ -1,115 +1,157 @@
-Ana leu "Duna"
-Ana leu "Fundação"
-Bruno leu "Duna"
-Carlos leu "Neuromancer"
-Diana leu "Orgulho e Preconceito"
-Eduardo leu "Como Eu Era Antes de Você"
-Fernanda leu "Hamlet"
-Gabriel leu "O Iluminado"
-Helena leu "Drácula"
-Igor leu "Psicose"
-Júlia leu "Steve Jobs"
-Ana deseja ler "Sapiens"
-Diana deseja ler "Como Eu Era Antes de Você"
-Gabriel deseja ler "A Garota no Trem"
-Júlia deseja ler "Einstein"
-Bruno não precisa da recomendação de "Duna" pois já leu este livro
-Ana não precisa da recomendação de "Fundação" pois já leu este livro
-Diana recomenda "Orgulho e Preconceito" para Eduardo
-Gabriel recomenda "O Iluminado" para Helena
-Helena recomenda "Drácula" para Igor
-Bruno não possui recomendação do livro ID 1 feita por Ana
-Eduardo aceita recomendação "Orgulho e Preconceito" de Diana
-Helena aceita recomendação "O Iluminado" de Gabriel
-Livros em comum entre Ana e Bruno: Duna
-Livros em comum entre Diana e Eduardo: Nenhum livro em comum
-Livros em comum entre Gabriel e Helena: Nenhum livro em comum
-Livros em comum entre Ana e Diana: Nenhum livro em comum
-Erro: Leitor com ID 15 não encontrado
-Existe afinidade entre Ana e Bruno
-Existe afinidade entre Diana e Eduardo
-Existe afinidade entre Gabriel e Helena
-Não existe afinidade entre Ana e Diana
-Não existe afinidade entre Ana e Júlia
-Não existe afinidade entre Diana e Gabriel
-Não existe afinidade entre Bruno e Helena
-Erro: Leitor com ID 99 não encontrado
-Erro: Livro com ID 99 não encontrado
-Erro: Leitor com ID 99 não encontrado
-Erro: Livro com ID 99 não encontrado
-Erro: Leitor recomendador com ID 99 não encontrado
-Erro: Livro com ID 99 não encontrado
-Erro: Leitor destinatário com ID 99 não encontrado
-Erro: Leitor com ID 99 não encontrado
-Ana não possui recomendação do livro ID 99 feita por Ana
-Erro: Leitor recomendador com ID 99 não encontrado
-Erro: Leitor com ID 99 não encontrado
-Ana não possui recomendação do livro ID 99 feita por Ana
-Erro: Leitor recomendador com ID 99 não encontrado
-Erro: Leitor com ID 99 não encontrado
-Erro: Leitor com ID 99 não encontrado
-Erro: Leitor com ID 99 não encontrado
-Erro: Leitor com ID 99 não encontrado
-Erro: Comando 9 não reconhecido
-Erro: Comando 0 não reconhecido
+Amanda leu "Dom Casmurro"
+Amanda leu "O Alienista"
+Bruno leu "O Nome da Rosa"
+Carla leu "Capitães da Areia"
+Diego leu "O Coruja"
+Elena leu "A Droga da Obediência"
+Felipe leu "O Hobbit"
+Gabriela leu "O Tempo e o Vento"
+Henrique leu "Vaga Música"
+Isabela leu "E Não Sobrou Nenhum"
+João leu "Robinson Crusoé"
+Karen leu "Triste Fim de Policarpo Quaresma"
+Leonardo leu "O Guarani"
+Mariana leu "Admirável Mundo Novo"
+Nicolas leu "O Senhor dos Anéis"
+Olivia leu "Auto da Barca do Inferno"
+Amanda deseja ler "A Cartomante"
+Bruno deseja ler "Dom Casmurro"
+Carla deseja ler "Minha Vida de Menina"
+Diego deseja ler "Admirável Mundo Novo"
+Elena deseja ler "O Senhor dos Anéis"
+Felipe deseja ler "Casa-Grande & Senzala"
+Gabriela deseja ler "Vaga Música"
+Henrique deseja ler "Capitães da Areia"
+Isabela deseja ler "As Aventuras de Tom Sawyer"
+João deseja ler "A Droga da Obediência"
+Karen deseja ler "O Hobbit"
+Leonardo deseja ler "O Tempo e o Vento"
+Mariana deseja ler "O Nome da Rosa"
+Nicolas deseja ler "Robinson Crusoé"
+Olivia deseja ler "O Coruja"
+Bruno já deseja ler "Dom Casmurro", recomendação desnecessária
+Bruno recomenda "O Nome da Rosa" para Carla
+Henrique já deseja ler "Capitães da Areia", recomendação desnecessária
+Diego recomenda "O Coruja" para Elena
+Elena recomenda "A Droga da Obediência" para Felipe
+Felipe recomenda "O Hobbit" para Gabriela
+Gabriela recomenda "O Tempo e o Vento" para Amanda
+Henrique recomenda "Vaga Música" para Isabela
+Isabela recomenda "E Não Sobrou Nenhum" para João
+João recomenda "Robinson Crusoé" para Karen
+Karen recomenda "Triste Fim de Policarpo Quaresma" para Leonardo
+Leonardo recomenda "O Guarani" para Mariana
+Mariana recomenda "Admirável Mundo Novo" para Nicolas
+Nicolas recomenda "O Senhor dos Anéis" para Olivia
+Olivia recomenda "Auto da Barca do Inferno" para Amanda
+Bruno não possui recomendação do livro ID 1 feita por Amanda
+Gabriela não possui recomendação do livro ID 4 feita por Amanda
+Livros em comum entre Amanda e Bruno: Nenhum livro em comum
+Livros em comum entre Carla e Henrique: Nenhum livro em comum
+Livros em comum entre Elena e João: Nenhum livro em comum
+Livros em comum entre Gabriela e Karen: Nenhum livro em comum
+Livros em comum entre Isabela e Mariana: Nenhum livro em comum
+Livros em comum entre Leonardo e Olivia: Nenhum livro em comum
+Existe afinidade entre Amanda e Gabriela
+Existe afinidade entre Bruno e Isabela
+Existe afinidade entre Carla e Olivia
+Existe afinidade entre Elena e Nicolas
+Existe afinidade entre Felipe e Leonardo
+Existe afinidade entre Henrique e Mariana
+Existe afinidade entre João e Diego
+Existe afinidade entre Bruno e Elena
+Existe afinidade entre João e Olivia
+Existe afinidade entre Felipe e Diego
+Existe afinidade entre Henrique e Nicolas
+Existe afinidade entre Diego e Karen
 Imprime toda a BookED
 
-Leitor: Ana
-Lidos: Duna, Fundação
-Desejados: Sapiens
-Recomendacoes: 
-Afinidades: Bruno, Carlos
+Leitor: Amanda
+Lidos: Dom Casmurro, O Alienista
+Desejados: A Cartomante
+Recomendacoes: O Tempo e o Vento, Auto da Barca do Inferno
+Afinidades: Bruno, Carla, Felipe, Gabriela, Henrique, Karen, Leonardo, Olivia
 
 Leitor: Bruno
-Lidos: Duna
-Desejados: 
+Lidos: O Nome da Rosa
+Desejados: Dom Casmurro
 Recomendacoes: 
-Afinidades: Ana
+Afinidades: Amanda, Gabriela, Isabela, Karen, Mariana
 
-Leitor: Carlos
-Lidos: Neuromancer
-Desejados: 
+Leitor: Carla
+Lidos: Capitães da Areia
+Desejados: Minha Vida de Menina
+Recomendacoes: O Nome da Rosa
+Afinidades: Amanda, Diego, Gabriela, Henrique, Isabela, Karen, Leonardo, Mariana, Olivia
+
+Leitor: Diego
+Lidos: O Coruja
+Desejados: Admirável Mundo Novo
 Recomendacoes: 
-Afinidades: Ana
+Afinidades: Carla, Elena, Isabela, João, Leonardo, Mariana, Olivia
 
-Leitor: Diana
-Lidos: Orgulho e Preconceito
-Desejados: Como Eu Era Antes de Você
+Leitor: Elena
+Lidos: A Droga da Obediência
+Desejados: O Senhor dos Anéis
+Recomendacoes: O Coruja
+Afinidades: Diego, Felipe, Isabela, João, Karen, Mariana, Nicolas
+
+Leitor: Felipe
+Lidos: O Hobbit
+Desejados: Casa-Grande & Senzala
+Recomendacoes: A Droga da Obediência
+Afinidades: Amanda, Elena, Gabriela, Karen, Leonardo, Nicolas, Olivia
+
+Leitor: Gabriela
+Lidos: O Tempo e o Vento
+Desejados: Vaga Música
+Recomendacoes: O Hobbit
+Afinidades: Amanda, Bruno, Carla, Felipe, Henrique, Karen, Leonardo, Mariana, Olivia
+
+Leitor: Henrique
+Lidos: Vaga Música
+Desejados: Capitães da Areia
 Recomendacoes: 
-Afinidades: Eduardo, Fernanda
+Afinidades: Amanda, Carla, Gabriela, Karen, Mariana, Olivia
 
-Leitor: Eduardo
-Lidos: Como Eu Era Antes de Você
-Desejados: Orgulho e Preconceito
-Recomendacoes: 
-Afinidades: Diana
+Leitor: Isabela
+Lidos: E Não Sobrou Nenhum
+Desejados: As Aventuras de Tom Sawyer
+Recomendacoes: Vaga Música
+Afinidades: Bruno, Carla, Diego, Elena, João, Leonardo, Mariana, Nicolas, Olivia
 
-Leitor: Fernanda
-Lidos: Hamlet
-Desejados: 
-Recomendacoes: 
-Afinidades: Diana
+Leitor: João
+Lidos: Robinson Crusoé
+Desejados: A Droga da Obediência
+Recomendacoes: E Não Sobrou Nenhum
+Afinidades: Diego, Elena, Isabela, Mariana, Nicolas
 
-Leitor: Gabriel
-Lidos: O Iluminado
-Desejados: A Garota no Trem
-Recomendacoes: 
-Afinidades: Helena
+Leitor: Karen
+Lidos: Triste Fim de Policarpo Quaresma
+Desejados: O Hobbit
+Recomendacoes: Robinson Crusoé
+Afinidades: Amanda, Bruno, Carla, Elena, Felipe, Gabriela, Henrique, Nicolas, Olivia
 
-Leitor: Helena
-Lidos: Drácula
-Desejados: O Iluminado
-Recomendacoes: 
-Afinidades: Gabriel, Igor
+Leitor: Leonardo
+Lidos: O Guarani
+Desejados: O Tempo e o Vento
+Recomendacoes: Triste Fim de Policarpo Quaresma
+Afinidades: Amanda, Carla, Diego, Felipe, Gabriela, Isabela, Olivia
 
-Leitor: Igor
-Lidos: Psicose
-Desejados: 
-Recomendacoes: Drácula
-Afinidades: Helena
+Leitor: Mariana
+Lidos: Admirável Mundo Novo
+Desejados: O Nome da Rosa
+Recomendacoes: O Guarani
+Afinidades: Bruno, Carla, Diego, Elena, Gabriela, Henrique, Isabela, João
 
-Leitor: Júlia
-Lidos: Steve Jobs
-Desejados: Einstein
-Recomendacoes: 
-Afinidades: 
+Leitor: Nicolas
+Lidos: O Senhor dos Anéis
+Desejados: Robinson Crusoé
+Recomendacoes: Admirável Mundo Novo
+Afinidades: Elena, Felipe, Isabela, João, Karen
+
+Leitor: Olivia
+Lidos: Auto da Barca do Inferno
+Desejados: O Coruja
+Recomendacoes: O Senhor dos Anéis
+Afinidades: Amanda, Carla, Diego, Felipe, Gabriela, Henrique, Isabela, Karen, Leonardo
