@@ -10,7 +10,6 @@ void imprimeString(void* string, FILE* saida)
     char* s = (char*)string;
     printf("%s", s);
     fprintf(saida, "%s", s);
-    // printf(" "); // ????????????
 }
 
 void desalocaString(void* string)

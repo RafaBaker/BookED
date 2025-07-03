@@ -7,21 +7,32 @@
 #include "utils.h"
 #include "lista.h"
 
+/**
+ * @brief Estrutura que representa uma célula da lista.
+ * 
+ * Armazena um item genérico e ponteiros para funções de manipulação.
+ */
 struct Celula
 {
-    void *item;
-    func_ptr_desaloca desaloca;
-    func_ptr_tipo getTipo;
-    func_ptr_imprime imprime;
-    func_ptr_compara compara;
-    Celula *prox;
+    void *item;                         /**< Ponteiro para o item armazenado */
+    func_ptr_desaloca desaloca;         /**< Função para desalocar o item */
+    func_ptr_tipo getTipo;              /**< Função para obter o tipo do item */
+    func_ptr_imprime imprime;           /**< Função para imprimir o item */
+    func_ptr_compara compara;           /**< Função para comparar o item */
+    Celula *prox;                       /**< Ponteiro para a próxima célula */
     // Celula* ant;
 };
 
+/**
+ * @brief Estrutura que representa uma lista genérica.
+ * 
+ * Armazena ponteiros para as células inicial e final, além de um identificador.
+ */
 struct Lista
 {
-    int idLista;
-    Celula *primeiro, *ultimo;
+    int idLista;            /**< Identificador da lista */
+    Celula *primeiro;       /**< Ponteiro para a primeira célula */
+    Celula *ultimo;         /**< Ponteiro para a última célula */
 };
 
 Lista *inicializaLista()

@@ -6,26 +6,28 @@
 #include "livro.h"
 #include "lista.h"
 
+/**
+ * @brief Estrutura que representa um livro.
+ * 
+ * Contém informações como id, título, autor, gênero e ano de publicação.
+ */
 struct Livro
 {
-    int id;
-    char* titulo;
-    char* autor;
-    char* genero;
-    int ano;
+    int id;         /**< Identificador do livro */
+    char* titulo;   /**< Título do livro */
+    char* autor;    /**< Autor do livro */
+    char* genero;   /**< Gênero do livro */
+    int ano;        /**< Ano de publicação do livro */
 };
 
 Livro* criaLivro(int id, char* titulo, char* autor, char* genero, int ano)
 {
     Livro* livro = malloc(sizeof(Livro));
-
     livro->id = id;
     livro->ano = ano;
-
     livro->titulo = strdup(titulo);
     livro->autor = strdup(autor);
     livro->genero = strdup(genero);
-
     return livro;
 }
 
