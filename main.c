@@ -14,7 +14,14 @@ int main(int argc, char const *argv[])
 
     char arquivoLivros[200];
     // printf("%s/livros.txt", argv[1]);
-    sprintf(arquivoLivros, "%s/livros.txt", argv[1]);
+    if (argc > 1)
+    {
+        sprintf(arquivoLivros, "%s/livros.txt", argv[1]);
+    }
+    else
+    {
+        sprintf(arquivoLivros, "livros.txt");
+    }
     FILE* pLivros;
     pLivros = fopen(arquivoLivros, "r");
     if (!pLivros)
@@ -28,7 +35,14 @@ int main(int argc, char const *argv[])
 
 
     char arquivoLeitores[200];
-    sprintf(arquivoLeitores, "%s/leitores.txt", argv[1]);
+    if (argc > 1)
+    {
+        sprintf(arquivoLeitores, "%s/leitores.txt", argv[1]);
+    }
+    else
+    {
+        sprintf(arquivoLeitores, "leitores.txt");
+    }
     FILE* pLeitores;
     pLeitores = fopen(arquivoLeitores, "r");
     if (!pLeitores)
@@ -41,7 +55,14 @@ int main(int argc, char const *argv[])
     fclose(pLeitores);
 
     char arquivoComandos[200];
-    sprintf(arquivoComandos, "%s/comandos.txt", argv[1]);
+    if (argc > 1)
+    {
+        sprintf(arquivoComandos, "%s/comandos.txt", argv[1]);
+    }
+    else
+    {
+        sprintf(arquivoComandos, "comandos.txt");
+    }
     FILE* pComandos;
     pComandos = fopen(arquivoComandos, "r");
     if (!pComandos)

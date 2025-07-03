@@ -1,0 +1,5 @@
+Id;nome;n_afinidades;afinidades
+1;Rafael;1;Drama
+2;Thais;2;Drama;Romance
+3;Gustavo;2;Romance;Suspense
+4;Marina;1;Suspense;

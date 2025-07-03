@@ -1,0 +1,3 @@
+funcionalidade;id1;id2;id3
+7;1;0;4
+8;0;0;0
