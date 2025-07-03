@@ -23,11 +23,14 @@ struct Livro
 Livro* criaLivro(int id, char* titulo, char* autor, char* genero, int ano)
 {
     Livro* livro = malloc(sizeof(Livro));
+
     livro->id = id;
     livro->ano = ano;
+
     livro->titulo = strdup(titulo);
     livro->autor = strdup(autor);
     livro->genero = strdup(genero);
+
     return livro;
 }
 

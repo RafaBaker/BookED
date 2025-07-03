@@ -61,6 +61,8 @@ void leLeitoresArquivo(BookED* b, FILE* pLeitores)
         linha[strcspn(linha, "\n")] = '\0';
         sscanf(linha, "%d;%[^;];", &id, nome);
         leitor = criaLeitor(id, nome);
+        
+        //Fatiando a string para pegar as afinidades
         char* token = strtok(linha, ";");
         token = strtok(NULL, ";");
         token = strtok(NULL, ";");
@@ -115,8 +117,10 @@ void adicionaLivroLido(BookED* b, int idLeitor, int idLivro, FILE* saida)
 
 void adicionarLivroDesejado(BookED* b, int idLeitor, int idLivro, FILE* saida)
 {
+    //Pegando livro e leitor
     Leitor* leitor = (Leitor*)buscaLista(b->leitores, idLeitor);
     Livro* livro = (Livro*)buscaLista(b->livros, idLivro);
+
     if (!leitor)
     {
         fprintf(saida, "Erro: Leitor com ID %d não encontrado\n", idLeitor);
@@ -298,6 +302,7 @@ void verificarAfinidade(BookED* b, int idLeitorOrigem, int idLeitorDestino, FILE
     if (visitado) free(visitado);
 }
 
+// Busca em profundidade pelo grafo
 static int buscaAfinidade(BookED* b, int idLeitorOrigem, int idLeitorDestino, int* visitado)
 {
     int result = 0;

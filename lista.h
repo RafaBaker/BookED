@@ -13,14 +13,39 @@ typedef struct Lista Lista;
  */
 typedef struct Celula Celula;
 
+/**
+ * @brief Ponteiro para função de desalocação de item.
+ * @param dado Ponteiro para o item a ser desalocado.
+ */
 typedef void (*func_ptr_desaloca)(void* dado);
 
+/**
+ * @brief Ponteiro para função que retorna o tipo do item.
+ * @return Tipo do item.
+ */
 typedef int (*func_ptr_tipo)();
 
+/**
+ * @brief Ponteiro para função de impressão de item.
+ * @param dado Ponteiro para o item a ser impresso.
+ * @param saida Ponteiro para o arquivo de saída.
+ */
 typedef void (*func_ptr_imprime)(void* dado, FILE* saida);
 
+/**
+ * @brief Ponteiro para função de comparação de item por id.
+ * @param dado Ponteiro para o item.
+ * @param id Identificador a ser comparado.
+ * @return 1 se iguais, 0 caso contrário.
+ */
 typedef int (*func_ptr_compara)(void* dado, int id);
 
+/**
+ * @brief Ponteiro para função de comparação de item com contexto.
+ * @param item Ponteiro para o item.
+ * @param contexto Ponteiro para o contexto.
+ * @return 1 se iguais, 0 caso contrário.
+ */
 typedef int (*func_ptr_compara_contexto)(void* item, void* contexto);
 
 /**

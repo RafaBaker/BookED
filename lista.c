@@ -187,24 +187,11 @@ void imprimeLista(Lista *lista, FILE* saida)
     }
 }
 
-
 void imprimeListaStruct(void* lista, FILE* saida)
 {
     Lista* l = (Lista*)lista;
     printf("Lista de ID %d\n", l->idLista);
 }
-
-// void imprimeListaLeitores(Lista *lista)
-// {
-//     if (!lista || !lista->primeiro) return;
-
-//     Celula *aux = lista->primeiro;
-//     while (aux)
-//     {
-//         aux->imprime(aux->item);
-//         aux = aux->prox;
-//     }
-// }
 
 int listaVazia(Lista* lista)
 {
@@ -247,9 +234,7 @@ void desalocaListaStruct(void* lista)
 
         free(lista);
         lista = NULL;
-        //return 1;
     }
-    //return 0;
 }
 
 int getTipoLista()
@@ -295,24 +280,13 @@ Lista* temItemComumLista(Lista* l1, Lista* l2)
         return NULL;
     }
 
-    // qtdL1 = quantidadeLista(l1);
-    // qtdL2 = quantidadeLista(l2);
-
     Lista* nova = inicializaLista();
 
-    // imprimeLista(l1);
     while (aux1)
     {
-        //printf("aux1: ");
-        //imprimeString(aux1->item);
         aux2 = l2->primeiro;
         while (aux2)
         {
-            // Talvez as afindades não estejam sendo armazenadas corretamente
-            // printf("\n");
-            // printf("aux2: ");
-            // imprimeString(aux2->item);
-            // printf("\n");
             if (aux1->getTipo() == STRING)
             {
                 if (!strcmp(aux1->item, aux2->item))
